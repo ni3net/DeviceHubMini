@@ -1,0 +1,54 @@
+# Ignore build output
+bin/
+obj/
+out/
+publish/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# IDE and editor folders
+.vs/
+.vscode/
+.idea/
+
+# Logs and temp files
+*.log
+*.tmp
+*.temp
+*.bak
+
+# OS files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Git files
+.git/
+.gitignore
+.gitattributes
+
+# Docker intermediate files
+Dockerfile.*
+*.dockerfile
+
+# Node modules (if frontend exists)
+node_modules/
+
+# Test results and coverage
+TestResults/
+*.coverage
+*.coveragexml
+
+# Python or scripts (optional)
+__pycache__/
+*.pyc
+
+# SQLite local DB (only include in dev, not container)
+*.db
+*.sqlite
+*.sqlite3

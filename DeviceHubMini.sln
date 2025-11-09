@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36518.9
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeviceHubMini.Service", "DeviceHubMini\DeviceHubMini.Service.csproj", "{BA284F05-0EF0-4A64-BB7E-768F3C0C44AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeviceHubMini.Common", "DeviceHubMini.Common\DeviceHubMini.Common.csproj", "{3A9EE203-26DB-49C7-9B67-979DD07E95D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeviceHubMini.Worker", "DeviceHubMini.Worker\DeviceHubMini.Worker.csproj", "{ADC731C6-4F0C-4EC7-9FFB-0223113EF01F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeviceHubMini.Infrastructure", "DeviceHubMini.Model\DeviceHubMini.Infrastructure.csproj", "{F7A33F42-38E7-4796-9E84-F4BEBAA1426A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeviceHubMini.Client", "DeviceHubMini.Client\DeviceHubMini.Client.csproj", "{95E31B3A-69C3-244E-A797-C912E0EE81E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeviceHubMini.Tests", "DeviceHubMini.Tests\DeviceHubMini.Tests.csproj", "{D35D3BA6-D78C-7BD5-1383-48EB9BFDB5D8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BA284F05-0EF0-4A64-BB7E-768F3C0C44AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA284F05-0EF0-4A64-BB7E-768F3C0C44AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA284F05-0EF0-4A64-BB7E-768F3C0C44AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA284F05-0EF0-4A64-BB7E-768F3C0C44AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A9EE203-26DB-49C7-9B67-979DD07E95D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A9EE203-26DB-49C7-9B67-979DD07E95D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A9EE203-26DB-49C7-9B67-979DD07E95D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A9EE203-26DB-49C7-9B67-979DD07E95D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADC731C6-4F0C-4EC7-9FFB-0223113EF01F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADC731C6-4F0C-4EC7-9FFB-0223113EF01F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADC731C6-4F0C-4EC7-9FFB-0223113EF01F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADC731C6-4F0C-4EC7-9FFB-0223113EF01F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7A33F42-38E7-4796-9E84-F4BEBAA1426A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7A33F42-38E7-4796-9E84-F4BEBAA1426A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7A33F42-38E7-4796-9E84-F4BEBAA1426A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7A33F42-38E7-4796-9E84-F4BEBAA1426A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95E31B3A-69C3-244E-A797-C912E0EE81E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95E31B3A-69C3-244E-A797-C912E0EE81E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95E31B3A-69C3-244E-A797-C912E0EE81E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95E31B3A-69C3-244E-A797-C912E0EE81E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D35D3BA6-D78C-7BD5-1383-48EB9BFDB5D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D35D3BA6-D78C-7BD5-1383-48EB9BFDB5D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D35D3BA6-D78C-7BD5-1383-48EB9BFDB5D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D35D3BA6-D78C-7BD5-1383-48EB9BFDB5D8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {132BA6B4-1411-4489-AAEC-09B62733D21D}
+	EndGlobalSection
+EndGlobal
