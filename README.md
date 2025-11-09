@@ -1,7 +1,7 @@
 ⚙️ Configuration & Run Instructions
 🧩 Client (GraphQL Mock Server)
 
-📄 appsettings.json:
+📄 appsettings.json:Client
 
 {
   "AllowedHosts": "*",
@@ -22,14 +22,14 @@
 docker stop devicehub-clientService 2>nul & docker rm devicehub-clientService 2>nul ^
 & docker build -t devicehub-client:latest . ^
 & docker run -it -p 5068:8080 --name devicehub-clientService devicehub-client:latest
-
+https://github.com/ni3net/DeviceHubMini/blob/main/README.md
 
 The GraphQL IDE will be available at
 👉 http://localhost:5068/graphql
 
 ⚙️ Service (Scanner + Dispatcher)
 
-📄 appsettings.json:
+📄 appsettings.json: Service
 
 {
   "ServiceName": "DeviceHubMini",
