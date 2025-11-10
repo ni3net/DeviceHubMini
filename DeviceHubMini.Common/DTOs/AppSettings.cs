@@ -18,6 +18,7 @@ namespace DeviceHubMini.Common.DTOs
         public string DeviceId { get; set; }
         public string WatchFolder { get; set; }
         public string ServiceDbConnection { get; set; }
+        public string ScannerType { get; set; }
         public int DispatchMaxFailureCycles { get; set; }
         public int ConfigFetchMin { get; set; }
 

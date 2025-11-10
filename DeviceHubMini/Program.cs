@@ -127,12 +127,22 @@ public class Program
     // ---------------------------
     private static void ConfigureLogging(IConfiguration configuration)
     {
-        var logBasePath = configuration["Logging:LogFilePath"]
-                          ?? Path.Combine(_baseDir, "Logs", "service-.log");
+        // Read base log folder from configuration or fallback to default
+        var logDirectory = configuration["Logging:LogFilePath"]?? _baseDir;
 
-        var infoLogPath = logBasePath.Replace("service-", "service-info-");
-        var errorLogPath = logBasePath.Replace("service-", "service-error-");
+        if (!string.IsNullOrWhiteSpace(logDirectory))
+        {
+            logDirectory = Path.Combine(_baseDir, "Logs");
+        }
 
+        // Ensure directory exists
+        Directory.CreateDirectory(logDirectory);
+
+        // Build log file paths
+        var infoLogPath = Path.Combine(logDirectory, "service-info-.log");
+        var errorLogPath = Path.Combine(logDirectory, "service-error-.log");
+
+        // Configure Serilog
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Debug()
             .WriteTo.Console(restrictedToMinimumLevel: LogEventLevel.Information)
@@ -154,7 +164,10 @@ public class Program
             )
             .Enrich.FromLogContext()
             .CreateLogger();
+
+        Log.Information("Logging initialized. Logs will be written to: {LogDirectory}", logDirectory);
     }
+
 
     // ---------------------------
     // Host Setup
@@ -181,7 +194,17 @@ public class Program
                     .AddPolicyHandler(GetRetryPolicy());
 
                 // Here we can inject the DI (file wacher, bluetooth scanner)
-                services.AddSingleton<IScanDevice, FileWatcherScanner>();
+                if (_appSettings.ScannerType?.Equals("Bluetooth", StringComparison.OrdinalIgnoreCase) == true)
+                {
+                    services.AddSingleton<IScanDevice, BluetoothScannerMock>();
+                    Log.Information("Scanner type: BluetoothScannerMock selected.");
+                }
+                else
+                {
+                    services.AddSingleton<IScanDevice, FileWatcherScanner>();
+                    Log.Information("Scanner type: FileWatcherScanner selected.");
+                }
+
                 services.AddSingleton<ClientService>();
 
 
