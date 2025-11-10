@@ -183,7 +183,7 @@ DeviceHubMini.Client
 docker stop devicehubmini 2>nul && docker rm devicehubmini 2>nul &&
 docker build -f DeviceHubMini/Dockerfile -t devicehubmini:latest . &&
 docker run -it -p 5159:8080 -e DOTNET_ENVIRONMENT=Development `
--v "C:\Users\ni3ne\source\repos\DeviceHubMini\containerMount:/mnt/data" `
+-v "C:\Users\ni3ne\source\repos\DeviceHubMini\containerMount:/mnt/data" ` // provide the mount dir path
 --name devicehubmini devicehubmini:latest
 ```
 
