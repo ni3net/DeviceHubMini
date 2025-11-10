@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "hsk6Rbsec/w=",
+  "dgSpecHash": "ulbJFE+vkBY=",
   "success": true,
-  "projectFilePath": "C:\\Users\\ni3ne\\source\\repos\\DeviceHubMini\\DeviceHubMini.Model\\DeviceHubMini.Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\ni3ne\\source\\repos\\DeviceHubMini\\DeviceHubMini.Infrastructure\\DeviceHubMini.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ni3ne\\.nuget\\packages\\dapper\\2.1.66\\dapper.2.1.66.nupkg.sha512",
     "C:\\Users\\ni3ne\\.nuget\\packages\\microsoft.data.sqlite.core\\9.0.10\\microsoft.data.sqlite.core.9.0.10.nupkg.sha512",

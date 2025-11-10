@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using DeviceHubMini.Worker.Interfaces;
+using DeviceHubMini.Common.Contracts;
+using DeviceHubMini.Common.DTOs;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 

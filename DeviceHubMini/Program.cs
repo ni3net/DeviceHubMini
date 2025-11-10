@@ -19,6 +19,11 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Polly;
 using Polly.Extensions.Http;
+using DeviceHubMini.Common.DTOs;
+using DeviceHubMini.Infrastructure.Contracts;
+using DeviceHubMini.Infrastructure.Repositories;
+using DeviceHubMini.Worker.Services;
+using DeviceHubMini.Services.GraphQL;
 
 public class Program
 {
@@ -122,7 +127,7 @@ public class Program
     // ---------------------------
     private static void ConfigureLogging(IConfiguration configuration)
     {
-        var logBasePath = configuration["Logging:LogFilePath"] 
+        var logBasePath = configuration["Logging:LogFilePath"]
                           ?? Path.Combine(_baseDir, "Logs", "service-.log");
 
         var infoLogPath = logBasePath.Replace("service-", "service-info-");
@@ -186,15 +191,18 @@ public class Program
                 services.AddHostedService<DataDispatcherWorker>();
             });
 
-            private static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
-            {
-                return HttpPolicyExtensions
-                    .HandleTransientHttpError() // Handles 5xx, 408, and HttpRequestException
-                    .WaitAndRetryForeverAsync(
-                        retryAttempt => TimeSpan.FromSeconds(Math.Min(60, Math.Pow(2, retryAttempt))),
-                        (outcome, timespan, retryAttempt, context) =>
-                        {
-                            Console.WriteLine($"[RetryPolicy] Request failed. Waiting {timespan.TotalSeconds}s before retry {retryAttempt}...");
-                        });
-            }
+    private static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
+    {
+        return HttpPolicyExtensions
+       .HandleTransientHttpError()
+       .Or<TaskCanceledException>()
+       .WaitAndRetryForeverAsync(
+           retryAttempt => TimeSpan.FromSeconds(Math.Min(60, Math.Pow(2, retryAttempt))),
+           (outcome, timespan, retryAttempt) =>
+           {
+               Log.Warning($"[RetryPolicy] Request failed. Waiting {timespan}s before retry {retryAttempt}...");
+           });
+
+
+    }
 }

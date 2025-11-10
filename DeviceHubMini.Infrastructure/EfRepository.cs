@@ -1,4 +1,5 @@
 ﻿
+using DeviceHubMini.Common.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Model.Context;
 using System.Data;

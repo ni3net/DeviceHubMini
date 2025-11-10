@@ -1,10 +1,3 @@
-C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Client\obj\Debug\net8.0\DeviceHubMini.Client.csproj.AssemblyReference.cache
-C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Client\obj\Debug\net8.0\rpswa.dswa.cache.json
-C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Client\obj\Debug\net8.0\DeviceHubMini.Client.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Client\obj\Debug\net8.0\DeviceHubMini.Client.AssemblyInfoInputs.cache
-C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Client\obj\Debug\net8.0\DeviceHubMini.Client.AssemblyInfo.cs
-C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Client\obj\Debug\net8.0\DeviceHubMini.Client.csproj.CoreCompileInputs.cache
-C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Client\obj\Debug\net8.0\DeviceHubMini.Client.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Client\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Client\bin\Debug\net8.0\appsettings.json
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Client\bin\Debug\net8.0\DeviceHubMini.Client.staticwebassets.endpoints.json
@@ -86,6 +79,14 @@ C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Client\bin\Debug\net8.0\
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Client\bin\Debug\net8.0\System.Text.Json.dll
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Client\bin\Debug\net8.0\Yarp.ReverseProxy.dll
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Client\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Client\obj\Debug\net8.0\DeviceHubMini.Client.csproj.AssemblyReference.cache
+C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Client\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Client\obj\Debug\net8.0\DeviceHubMini.Client.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Client\obj\Debug\net8.0\DeviceHubMini.Client.AssemblyInfoInputs.cache
+C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Client\obj\Debug\net8.0\DeviceHubMini.Client.AssemblyInfo.cs
+C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Client\obj\Debug\net8.0\DeviceHubMini.Client.csproj.CoreCompileInputs.cache
+C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Client\obj\Debug\net8.0\DeviceHubMini.Client.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Client\obj\Debug\net8.0\DeviceHubMini.Client.sourcelink.json
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Client\obj\Debug\net8.0\rjimswa.dswa.cache.json
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Client\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Client\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json

@@ -4,6 +4,8 @@ using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using DeviceHubMini.Common.DTOs;
+using DeviceHubMini.Infrastructure.Contracts;
 using DeviceHubMini.Infrastructure.Entities;
 using DeviceHubMini.Model;
 using Microsoft.Extensions.Logging;

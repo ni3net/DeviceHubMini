@@ -27,6 +27,7 @@ C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Worker\obj\Debug\net8.0\
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Worker\obj\Debug\net8.0\DeviceHubMini.Worker.AssemblyInfoInputs.cache
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Worker\obj\Debug\net8.0\DeviceHubMini.Worker.AssemblyInfo.cs
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Worker\obj\Debug\net8.0\DeviceHubMini.Worker.csproj.CoreCompileInputs.cache
+C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Worker\obj\Debug\net8.0\DeviceHubMini.Worker.sourcelink.json
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Worker\obj\Debug\net8.0\DeviceHu.24E3EA42.Up2Date
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Worker\obj\Debug\net8.0\DeviceHubMini.Worker.dll
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Worker\obj\Debug\net8.0\refint\DeviceHubMini.Worker.dll

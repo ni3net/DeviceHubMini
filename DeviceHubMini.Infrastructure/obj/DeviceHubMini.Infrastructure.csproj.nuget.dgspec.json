@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ni3ne\\source\\repos\\DeviceHubMini\\DeviceHubMini.Model\\DeviceHubMini.Infrastructure.csproj": {}
+    "C:\\Users\\ni3ne\\source\\repos\\DeviceHubMini\\DeviceHubMini.Infrastructure\\DeviceHubMini.Infrastructure.csproj": {}
   },
   "projects": {
     "C:\\Users\\ni3ne\\source\\repos\\DeviceHubMini\\DeviceHubMini.Common\\DeviceHubMini.Common.csproj": {
@@ -69,14 +69,14 @@
         }
       }
     },
-    "C:\\Users\\ni3ne\\source\\repos\\DeviceHubMini\\DeviceHubMini.Model\\DeviceHubMini.Infrastructure.csproj": {
+    "C:\\Users\\ni3ne\\source\\repos\\DeviceHubMini\\DeviceHubMini.Infrastructure\\DeviceHubMini.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ni3ne\\source\\repos\\DeviceHubMini\\DeviceHubMini.Model\\DeviceHubMini.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\ni3ne\\source\\repos\\DeviceHubMini\\DeviceHubMini.Infrastructure\\DeviceHubMini.Infrastructure.csproj",
         "projectName": "DeviceHubMini.Infrastructure",
-        "projectPath": "C:\\Users\\ni3ne\\source\\repos\\DeviceHubMini\\DeviceHubMini.Model\\DeviceHubMini.Infrastructure.csproj",
+        "projectPath": "C:\\Users\\ni3ne\\source\\repos\\DeviceHubMini\\DeviceHubMini.Infrastructure\\DeviceHubMini.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\ni3ne\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ni3ne\\source\\repos\\DeviceHubMini\\DeviceHubMini.Model\\obj\\",
+        "outputPath": "C:\\Users\\ni3ne\\source\\repos\\DeviceHubMini\\DeviceHubMini.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

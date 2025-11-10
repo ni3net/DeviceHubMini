@@ -9,3 +9,4 @@ C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Common\obj\Release\net8.
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Common\obj\Release\net8.0\refint\DeviceHubMini.Common.dll
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Common\obj\Release\net8.0\DeviceHubMini.Common.pdb
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Common\obj\Release\net8.0\ref\DeviceHubMini.Common.dll
+C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Common\obj\Release\net8.0\DeviceHubMini.Common.sourcelink.json

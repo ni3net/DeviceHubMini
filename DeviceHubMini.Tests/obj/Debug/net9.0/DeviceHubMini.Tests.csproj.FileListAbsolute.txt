@@ -1,5 +1,6 @@
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tests\bin\Debug\net9.0\.msCoverageSourceRootsMapping_DeviceHubMini.Tests
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tests\bin\Debug\net9.0\CoverletSourceRootsMapping_DeviceHubMini.Tests
+C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tests\bin\Debug\net9.0\testhost.dll
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tests\bin\Debug\net9.0\DeviceHubMini.Client.deps.json
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tests\bin\Debug\net9.0\DeviceHubMini.Client.runtimeconfig.json
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tests\bin\Debug\net9.0\appsettings.Development.json
@@ -7,11 +8,10 @@ C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tests\bin\Debug\net9.0\a
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tests\bin\Debug\net9.0\DeviceHubMini.Client.staticwebassets.endpoints.json
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tests\bin\Debug\net9.0\DeviceHubMini.Client.exe
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tests\bin\Debug\net9.0\testhost.exe
-C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tests\bin\Debug\net9.0\testhost.dll
+C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tests\bin\Debug\net9.0\MvcTestingAppManifest.json
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tests\bin\Debug\net9.0\xunit.runner.visualstudio.testadapter.dll
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tests\bin\Debug\net9.0\xunit.runner.reporters.netcoreapp10.dll
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tests\bin\Debug\net9.0\xunit.runner.utility.netcoreapp10.dll
-C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tests\bin\Debug\net9.0\MvcTestingAppManifest.json
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tests\bin\Debug\net9.0\DeviceHubMini.Tests.deps.json
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tests\bin\Debug\net9.0\DeviceHubMini.Tests.runtimeconfig.json
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tests\bin\Debug\net9.0\DeviceHubMini.Tests.dll
@@ -499,6 +499,7 @@ C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tests\obj\Debug\net9.0\D
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tests\obj\Debug\net9.0\DeviceHubMini.Tests.AssemblyInfoInputs.cache
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tests\obj\Debug\net9.0\DeviceHubMini.Tests.AssemblyInfo.cs
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tests\obj\Debug\net9.0\DeviceHubMini.Tests.csproj.CoreCompileInputs.cache
+C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tests\obj\Debug\net9.0\DeviceHubMini.Tests.sourcelink.json
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tests\obj\Debug\net9.0\DeviceHu.ADA73AEF.Up2Date
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tests\obj\Debug\net9.0\DeviceHubMini.Tests.dll
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tests\obj\Debug\net9.0\refint\DeviceHubMini.Tests.dll

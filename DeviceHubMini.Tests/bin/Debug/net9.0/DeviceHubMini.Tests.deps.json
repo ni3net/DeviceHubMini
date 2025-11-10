@@ -2367,6 +2367,7 @@
           "DeviceHubMini.Common": "1.0.0",
           "DeviceHubMini.Infrastructure": "1.0.0",
           "Microsoft.Extensions.Hosting": "9.0.10",
+          "Microsoft.Extensions.Http": "9.0.10",
           "Newtonsoft.Json": "13.0.4"
         },
         "runtime": {

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using DeviceHubMini.Infrastructure.Entities;
 using Dapper;
+using DeviceHubMini.Infrastructure.Contracts;
+using DeviceHubMini.Common.Contracts;
 
 namespace DeviceHubMini.Infrastructure.Repositories
 {
@@ -15,7 +17,7 @@ namespace DeviceHubMini.Infrastructure.Repositories
             _repository = repository;
         }
 
-        public async Task<IReadOnlyList<ScanEventEntity>> GetPendingEventsAsync(int limit = 25)
+        public async Task<IEnumerable<ScanEventEntity>> GetPendingEventsAsync(int limit = 25)
         {
             const string sql = @"
 SELECT * 
@@ -27,7 +29,7 @@ LIMIT @Limit;";
             return await _repository.GetListAsync<ScanEventEntity>(sql, new { Limit = limit });
         }
 
-        public async Task MarkAsSentAsync(Guid eventId, DateTimeOffset sentAt)
+        public async Task MarkAsSentAsync(string eventId, DateTimeOffset sentAt)
         {
             const string sql = @"
 UPDATE ScanEvents
@@ -39,7 +41,7 @@ WHERE EventId = @EventId;";
             await _repository.ExecuteAsync(sql, new { EventId = eventId, SentAt = sentAt });
         }
 
-        public async Task MarkAsFailedAsync(Guid eventId, string errorMessage)
+        public async Task MarkAsFailedAsync(string eventId, string errorMessage)
         {
             const string sql = @"
 UPDATE ScanEvents

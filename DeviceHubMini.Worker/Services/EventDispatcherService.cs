@@ -1,10 +1,6 @@
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using DeviceHubMini.Infrastructure.Entities;
-using DeviceHubMini.Infrastructure.GraphQL;
-using DeviceHubMini.Infrastructure.Repositories;
-using DeviceHubMini.Worker.Interfaces;
+
+using DeviceHubMini.Common.Contracts;
+using DeviceHubMini.Infrastructure.Contracts;
 using Microsoft.Extensions.Logging;
 
 namespace DeviceHubMini.Worker.Services
@@ -28,7 +24,7 @@ namespace DeviceHubMini.Worker.Services
         public async Task<bool> DispatchPendingEventsAsync(CancellationToken ct)
         {
             var pending = await _eventRepo.GetPendingEventsAsync(25);
-            if (pending == null || pending.Count == 0)
+            if (pending == null || pending.Count() == 0)
                 return true;
 
             int successCount = 0;
@@ -50,7 +46,7 @@ namespace DeviceHubMini.Worker.Services
                 }
             }
 
-            _logger.LogInformation("Dispatch batch complete: {Success}/{Total} sent.", successCount, pending.Count);
+            _logger.LogInformation("Dispatch batch complete: {Success}/{Total} sent.", successCount, pending.Count());
             return successCount > 0;
         }
     }

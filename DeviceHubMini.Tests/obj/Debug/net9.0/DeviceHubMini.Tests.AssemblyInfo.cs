@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DeviceHubMini.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+52a64851910a4d0f9dddf1692a901eba5d9d349f")]
 [assembly: System.Reflection.AssemblyProductAttribute("DeviceHubMini.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DeviceHubMini.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
