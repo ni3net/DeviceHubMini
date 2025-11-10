@@ -19,7 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DeviceHubMini.Client\DeviceHubMini.Client.csproj" />
     <ProjectReference Include="..\DeviceHubMini.Common\DeviceHubMini.Common.csproj" />
-    <ProjectReference Include="..\DeviceHubMini.Model\DeviceHubMini.Infrastructure.csproj" />
+    <ProjectReference Include="..\DeviceHubMini.Infrastructure\DeviceHubMini.Infrastructure.csproj" />
     <ProjectReference Include="..\DeviceHubMini.Worker\DeviceHubMini.Worker.csproj" />
   </ItemGroup>
 

@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeviceHubMini.Common", "Dev
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeviceHubMini.Worker", "DeviceHubMini.Worker\DeviceHubMini.Worker.csproj", "{ADC731C6-4F0C-4EC7-9FFB-0223113EF01F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeviceHubMini.Infrastructure", "DeviceHubMini.Model\DeviceHubMini.Infrastructure.csproj", "{F7A33F42-38E7-4796-9E84-F4BEBAA1426A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeviceHubMini.Infrastructure", "DeviceHubMini.Infrastructure\DeviceHubMini.Infrastructure.csproj", "{F7A33F42-38E7-4796-9E84-F4BEBAA1426A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeviceHubMini.Client", "DeviceHubMini.Client\DeviceHubMini.Client.csproj", "{95E31B3A-69C3-244E-A797-C912E0EE81E4}"
 EndProject
