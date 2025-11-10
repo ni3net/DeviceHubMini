@@ -89,9 +89,7 @@ C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\runti
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\DeviceHubMini.Common.dll
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\DeviceHubMini.Infrastructure.dll
-C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\DeviceHubMini.Jobs.dll
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\DeviceHubMini.Common.pdb
-C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\DeviceHubMini.Jobs.pdb
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\DeviceHubMini.Infrastructure.pdb
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\obj\Release\net8.0\DeviceHubMini.Service.csproj.AssemblyReference.cache
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\obj\Release\net8.0\DeviceHubMini.Service.GeneratedMSBuildEditorConfig.editorconfig
@@ -105,3 +103,11 @@ C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\obj\Release\net8.0\Devic
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\obj\Release\net8.0\DeviceHubMini.Service.genruntimeconfig.cache
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\obj\Release\net8.0\ref\DeviceHubMini.Service.dll
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\Utility.bat
+C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\sample\sample01.txt
+C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\Microsoft.Extensions.Http.dll
+C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\Microsoft.Extensions.Http.Polly.dll
+C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\Polly.dll
+C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\Polly.Extensions.Http.dll
+C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\DeviceHubMini.Worker.dll
+C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\DeviceHubMini.Worker.pdb
+C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\obj\Release\net8.0\DeviceHubMini.Service.sourcelink.json

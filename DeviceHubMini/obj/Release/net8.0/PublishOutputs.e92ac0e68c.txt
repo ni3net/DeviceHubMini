@@ -1,4 +1,5 @@
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\publish\appsettings.json
+C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\publish\sample\sample01.txt
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\publish\Utility.bat
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\publish\DeviceHubMini.Service.exe
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\publish\DeviceHubMini.Service.dll
@@ -32,6 +33,8 @@ C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\publi
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\publish\Microsoft.Extensions.Hosting.dll
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\publish\Microsoft.Extensions.Hosting.Abstractions.dll
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\publish\Microsoft.Extensions.Hosting.WindowsServices.dll
+C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\publish\Microsoft.Extensions.Http.dll
+C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\publish\Microsoft.Extensions.Http.Polly.dll
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\publish\Microsoft.Extensions.Logging.dll
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\publish\Microsoft.Extensions.Logging.Abstractions.dll
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\publish\Microsoft.Extensions.Logging.Configuration.dll
@@ -44,6 +47,8 @@ C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\publi
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\publish\Microsoft.Extensions.Primitives.dll
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\publish\Newtonsoft.Json.dll
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\publish\Npgsql.dll
+C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\publish\Polly.dll
+C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\publish\Polly.Extensions.Http.dll
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\publish\Serilog.dll
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\publish\Serilog.Extensions.Hosting.dll
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\publish\Serilog.Extensions.Logging.dll
@@ -90,7 +95,7 @@ C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\publi
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\publish\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\publish\DeviceHubMini.Common.dll
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\publish\DeviceHubMini.Infrastructure.dll
-C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\publish\DeviceHubMini.Jobs.dll
+C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\publish\DeviceHubMini.Worker.dll
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\publish\DeviceHubMini.Common.pdb
-C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\publish\DeviceHubMini.Jobs.pdb
 C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\publish\DeviceHubMini.Infrastructure.pdb
+C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\publish\DeviceHubMini.Worker.pdb
