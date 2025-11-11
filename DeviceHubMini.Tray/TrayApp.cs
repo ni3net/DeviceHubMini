@@ -4,6 +4,7 @@ using System.ServiceProcess;
 using System.Windows.Forms;
 using DeviceHubMini.Tray.Services;
 using DeviceHubMini.Tray.Views;
+using Timer = System.Windows.Forms.Timer;
 
 namespace DeviceHubMini.Tray
 {
@@ -19,7 +20,7 @@ namespace DeviceHubMini.Tray
 
         public TrayApp()
         {
-            string serviceName = "DeviceHubMini.Service"; // Your actual Windows Service name
+            string serviceName = "DeviceHubMiniService"; // Your actual Windows Service name
             _serviceHelper = new ServiceHelper(serviceName);
 
             _iconRunning = new Icon("Assets/icon-running.ico");
