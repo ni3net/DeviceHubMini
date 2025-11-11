@@ -33,7 +33,8 @@ public class Program
     {
         try
         {
-            var environment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT") ?? "Production";
+            //var environment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT") ?? "Production";
+            var environment = "Development";
             Console.WriteLine($"Current environment: {environment}");
 
             // Load configuration
@@ -55,6 +56,10 @@ public class Program
         catch (Exception ex)
         {
             Log.Fatal(ex, "Service terminated unexpectedly");
+            File.WriteAllText(
+     Path.Combine(AppContext.BaseDirectory, "service-startup-error.log"),
+     $"{DateTime.Now:u}\n{ex}");
+            throw;
         }
         finally
         {
