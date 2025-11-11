@@ -1,6 +1,8 @@
-﻿using DeviceHubMini.Common.DTOs;
+﻿using Dapper;
+using DeviceHubMini.Common.DTOs;
 using DeviceHubMini.Infrastructure.Contracts;
 using DeviceHubMini.Infrastructure.Entities;
+using DeviceHubMini.Infrastructure.Handler;
 using DeviceHubMini.Infrastructure.Repositories;
 using DeviceHubMini.Model;
 using DeviceHubMini.Worker.Services;
@@ -23,6 +25,7 @@ namespace DeviceHubMini.Tests
         [Fact(DisplayName = "Durability: Unsent events persist and dispatch after restart")]
         public async Task UnsentEvents_Persist_And_Dispatch_After_Restart()
         {
+            SqlMapper.AddTypeHandler(new DateTimeOffsetHandler());
             // Arrange
             string dbPath = Path.Combine(Path.GetTempPath(), $"durability_{Guid.NewGuid()}.db");
             if (File.Exists(dbPath)) File.Delete(dbPath);
@@ -96,9 +99,23 @@ namespace DeviceHubMini.Tests
                 "SELECT * FROM ScanEvents WHERE Status = 'Pending'");
             Assert.Empty(remaining);
 
+            await Task.Delay(300);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
             // Cleanup
-            if (File.Exists(dbPath))
-                File.Delete(dbPath);
+            for (int i = 0; i < 5; i++)
+            {
+                try
+                {
+                    if (File.Exists(dbPath))
+                        File.Delete(dbPath);
+                    break;
+                }
+                catch (IOException)
+                {
+                    await Task.Delay(200);
+                }
+            }
         }
     }
 }

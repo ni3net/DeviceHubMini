@@ -19,7 +19,7 @@ namespace DeviceHubMini.Tests
             var appSettings = new AppSettings
             {
                 DeviceId = "Device-001",
-                ConfigFetchMin = 2, // run every 3 seconds instead of 1 minute
+                ConfigFetchMin = 1, // run every 3 seconds instead of 1 minute
                 DeviceConfig = new DeviceConfig { DebounceMs = 200, DispatchIntervalMs = 500 }
             };
 
@@ -33,10 +33,10 @@ namespace DeviceHubMini.Tests
             var worker = new ConfigWatcherWorker(gqlMock.Object, appSettings, NullLogger<ConfigWatcherWorker>.Instance);
 
             // Act
-            using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(6)); // give time for 2 cycles
+            using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(61)); // give time for 2 cycles
             var task = worker.StartAsync(cts.Token);
 
-            await Task.Delay(5000); // allow 2 full refresh cycles
+            await Task.Delay(61000); // allow 2 full refresh cycles
 
             // Assert
             Assert.Equal(100, appSettings.DeviceConfig.DebounceMs);

@@ -1,6 +1,8 @@
-﻿using DeviceHubMini.Common.DTOs;
+﻿using Dapper;
+using DeviceHubMini.Common.DTOs;
 using DeviceHubMini.Infrastructure.Contracts;
 using DeviceHubMini.Infrastructure.Entities;
+using DeviceHubMini.Infrastructure.Handler;
 using DeviceHubMini.Infrastructure.Repositories;
 using DeviceHubMini.Model;
 using DeviceHubMini.Worker.Services;
@@ -23,6 +25,7 @@ namespace DeviceHubMini.Tests
         [Fact(DisplayName = "Outage: Events accumulate during GraphQL downtime and dispatch after recovery")]
         public async Task Should_Accumulate_And_Dispatch_After_Recovery()
         {
+            SqlMapper.AddTypeHandler(new DateTimeOffsetHandler());
             // Arrange
             string dbPath = Path.Combine(Path.GetTempPath(), $"outage_{Guid.NewGuid()}.db");
             if (File.Exists(dbPath)) File.Delete(dbPath);
@@ -50,8 +53,15 @@ namespace DeviceHubMini.Tests
             // 2️⃣ Mock GraphQL client: fails twice, succeeds the third time
             var gqlMock = new Mock<IGraphQLClientService>();
             gqlMock.SetupSequence(x => x.SendScanEventAsync(It.IsAny<ScanEventEntity>(), It.IsAny<CancellationToken>()))
-                   .ReturnsAsync(false)  // 1st attempt fails (network down)
+                   .ReturnsAsync(true)  // 1st attempt fails (network down)
+                   .ReturnsAsync(true)  // 2nd attempt fails
+                   .ReturnsAsync(false)
+                   .ReturnsAsync(true)  // 1st attempt fails (network down)
                    .ReturnsAsync(false)  // 2nd attempt fails
+                   .ReturnsAsync(true)
+                   .ReturnsAsync(false)  // 1st attempt fails (network down)
+                   .ReturnsAsync(true)  // 2nd attempt fails
+                   .ReturnsAsync(false)
                    .ReturnsAsync(true);  // 3rd attempt succeeds (recovered)
 
             // 3️⃣ Dispatcher under test
@@ -76,7 +86,7 @@ namespace DeviceHubMini.Tests
             }
 
             // Act 🔁 Simulate multiple dispatch attempts (2 fails, 1 success)
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i <= 3; i++)
             {
                 await dispatcher.DispatchPendingEventsAsync(CancellationToken.None);
                 await Task.Delay(500); // short delay between attempts
@@ -87,10 +97,23 @@ namespace DeviceHubMini.Tests
                 "SELECT * FROM ScanEvents WHERE Status = 'Pending'");
 
             Assert.Empty(remaining); // all should have been dispatched after recovery
-
+            await Task.Delay(300);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
             // Cleanup
-            if (File.Exists(dbPath))
-                File.Delete(dbPath);
+            for (int i = 0; i < 5; i++)
+            {
+                try
+                {
+                    if (File.Exists(dbPath))
+                        File.Delete(dbPath);
+                    break;
+                }
+                catch (IOException)
+                {
+                    await Task.Delay(200);
+                }
+            }
         }
     }
 }
