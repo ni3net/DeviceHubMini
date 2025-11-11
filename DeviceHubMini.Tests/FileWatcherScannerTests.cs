@@ -22,7 +22,6 @@ namespace DeviceHubMini.Tests
         [Fact]
         public async Task Should_Raise_OnScan_When_New_File_Created()
         {
-            // Arrange
             var appSettings = new AppSettings
             {
                 DeviceId = "D1",
@@ -43,22 +42,19 @@ namespace DeviceHubMini.Tests
 
             await scanner.StartAsync(CancellationToken.None);
 
-            // Act
             string file = Path.Combine(_testFolder, "scan.txt");
             await File.WriteAllTextAsync(file, "12345");
-            await Task.Delay(1000); // give watcher time
+            await Task.Delay(1000);
 
             await scanner.StopAsync(CancellationToken.None);
 
-            // Assert
             Assert.True(eventRaised, "Expected OnScan event to be raised.");
-            Assert.True(File.Exists(Path.Combine(_testFolder, "processed", "scan.txt")), "Processed file should be moved.");
+            Assert.True(File.Exists(Path.Combine(_testFolder, "processed", "scan.txt")));
         }
 
         [Fact]
         public async Task Should_Ignore_Duplicates_Within_Debounce_Window()
         {
-            // Arrange
             var appSettings = new AppSettings
             {
                 DeviceId = "D1",
@@ -74,25 +70,22 @@ namespace DeviceHubMini.Tests
 
             await scanner.StartAsync(CancellationToken.None);
 
-            // Act
             string file1 = Path.Combine(_testFolder, "file1.txt");
             string file2 = Path.Combine(_testFolder, "file2.txt");
 
             await File.WriteAllTextAsync(file1, "ABC123");
-            await Task.Delay(200); // within debounce window
+            await Task.Delay(200);
             await File.WriteAllTextAsync(file2, "ABC123");
 
             await Task.Delay(1000);
             await scanner.StopAsync(CancellationToken.None);
 
-            // Assert
-            Assert.Equal(1, eventCount); // only first one counted
+            Assert.Equal(1, eventCount);
         }
 
         [Fact]
         public async Task Should_Move_To_Error_When_File_Locked()
         {
-            // Arrange
             var appSettings = new AppSettings
             {
                 DeviceId = "D1",
@@ -105,18 +98,15 @@ namespace DeviceHubMini.Tests
 
             await scanner.StartAsync(CancellationToken.None);
 
-            // Simulate locked file
             string filePath = Path.Combine(_testFolder, "locked.txt");
             using (var fs = File.Create(filePath))
             {
-                // file stays open so scanner can't read
                 await Task.Delay(4200);
             }
 
             await Task.Delay(150);
             await scanner.StopAsync(CancellationToken.None);
 
-            // Assert
             string errorPath = Path.Combine(_testFolder, "error", "locked.txt");
             Assert.True(File.Exists(errorPath), "File should be moved to error folder after read failure.");
         }

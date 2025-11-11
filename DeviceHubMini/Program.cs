@@ -23,7 +23,6 @@ using DeviceHubMini.Common.DTOs;
 using DeviceHubMini.Infrastructure.Contracts;
 using DeviceHubMini.Infrastructure.Repositories;
 using DeviceHubMini.Worker.Services;
-using DeviceHubMini.Services.GraphQL;
 
 public class Program
 {
@@ -184,14 +183,15 @@ public class Program
                 services.AddSingleton<IConnectionFactory, SqlLiteConnectionFactory>();
                 services.AddSingleton<IRepository, DapperRepository>();
                 services.AddSingleton<IScanDataEventRepository, ScanDataEventRepository>();
+                
+                // Configure resilient HTTP client
+                services.AddHttpClient(nameof(GraphQLClientService))
+                .SetHandlerLifetime(TimeSpan.FromMinutes(5))
+                .AddPolicyHandler(Policy.TimeoutAsync<HttpResponseMessage>(10))
+                .AddPolicyHandler(GetRetryPolicy());
+
                 services.AddSingleton<IEventDispatcherService, EventDispatcherService>();
                 services.AddSingleton<IGraphQLClientService, GraphQLClientService>();
-
-                // Configure resilient HTTP client
-                services.AddHttpClient(nameof(EventDispatcherService))
-                    .SetHandlerLifetime(TimeSpan.FromMinutes(5))
-                   .AddPolicyHandler(Policy.TimeoutAsync<HttpResponseMessage>(10))
-                    .AddPolicyHandler(GetRetryPolicy());
 
                 // Here we can inject the DI (file wacher, bluetooth scanner)
                 if (_appSettings.ScannerType?.Equals("Bluetooth", StringComparison.OrdinalIgnoreCase) == true)
@@ -204,9 +204,6 @@ public class Program
                     services.AddSingleton<IScanDevice, FileWatcherScanner>();
                     Log.Information("Scanner type: FileWatcherScanner selected.");
                 }
-
-                services.AddSingleton<ClientService>();
-
 
                 // Background workers
                 services.AddHostedService<ConfigWatcherWorker>();

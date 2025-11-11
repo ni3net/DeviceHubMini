@@ -1,5 +1,4 @@
 ﻿using DeviceHubMini.Common.Contracts;
-using DeviceHubMini.Infrastructure.Context;
 using DeviceHubMini.Infrastructure.Entities;
 using DeviceHubMini.Jobs.Interface;
 using DeviceHubMini.Model;
