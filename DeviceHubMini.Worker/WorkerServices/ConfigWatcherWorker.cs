@@ -1,51 +1,74 @@
 ﻿using DeviceHubMini.Common.DTOs;
-using DeviceHubMini.Infrastructure.Services;
+using DeviceHubMini.Infrastructure.Contracts;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DeviceHubMini.Worker.WorkerServices
 {
+    /// <summary>
+    /// Periodically polls the GraphQL API for updated device configuration.
+    /// Updates in-memory AppSettings when new config is fetched.
+    /// </summary>
     public class ConfigWatcherWorker : BackgroundService
     {
-        private readonly ClientService _clientService;
+        private readonly IGraphQLClientService _graphqlClientService;
         private readonly AppSettings _appSettings;
         private readonly string _deviceId;
         private readonly ILogger<ConfigWatcherWorker> _logger;
-        public ConfigWatcherWorker(ClientService clientService, AppSettings appSettings, ILogger<ConfigWatcherWorker> logger)
+
+        public ConfigWatcherWorker(
+            IGraphQLClientService graphqlClientService,
+            AppSettings appSettings,
+            ILogger<ConfigWatcherWorker> logger)
         {
-            _clientService = clientService;
+            _graphqlClientService = graphqlClientService;
             _appSettings = appSettings;
-            _deviceId = "Device-001"; // could come from env/config
             _logger = logger;
+
+            // Device ID can come from configuration or environment
+            _deviceId = _appSettings.DeviceId ?? "Device-001";
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            _logger.LogInformation("ConfigWatcherWorker started. DeviceId = {DeviceId}", _deviceId);
+
             while (!stoppingToken.IsCancellationRequested)
             {
                 try
                 {
-                    var config = await _clientService.GetDeviceConfigAsync(_deviceId, stoppingToken);
+                    // Fetch latest config from GraphQL
+                    var config = await _graphqlClientService.GetDeviceConfigAsync(_deviceId, stoppingToken);
+
                     if (config != null)
                     {
-                        // Update the in-memory settings (thread-safe)
+                        // Thread-safe update of current device configuration
                         _appSettings.DeviceConfig = config;
-                        _logger.LogInformation($"[ConfigWatcher] Updated config: debounce={config.DebounceMs}, interval={config.DispatchIntervalMs}");
+                        _logger.LogInformation(
+                            "[ConfigWatcher] Updated config: debounce={Debounce}ms, interval={Interval}ms",
+                            config.DebounceMs,
+                            config.DispatchIntervalMs
+                        );
+                    }
+                    else
+                    {
+                        _logger.LogWarning("[ConfigWatcher] No config received from server for {DeviceId}", _deviceId);
                     }
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogInformation($"[ConfigWatcher] Failed to refresh config: {ex.Message}");
+                    _logger.LogError(ex, "[ConfigWatcher] Failed to refresh config for {DeviceId}", _deviceId);
                 }
 
-                // check in as per define in the config (or as configured)
-                await Task.Delay(TimeSpan.FromMinutes(_appSettings.ConfigFetchMin), stoppingToken);
+                // Delay for configured interval
+                var delayMinutes = Math.Max(1, _appSettings.ConfigFetchMin);
+                await Task.Delay(TimeSpan.FromMinutes(delayMinutes), stoppingToken);
             }
+
+            _logger.LogInformation("ConfigWatcherWorker stopped.");
         }
     }
 }
