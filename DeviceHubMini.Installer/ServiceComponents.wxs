@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+     xmlns:util="http://wixtoolset.org/schemas/v4/wxs/util">
+
+  <!-- Define publish output directory -->
+  <?define PublishDir = "C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\publish\win-x64\" ?>
+
+  <Fragment>
+    <ComponentGroup Id="ServiceComponents">
+
+      <!-- Main service executable -->
+      <Component Id="cmp.DeviceHubMiniServiceExe" Directory="INSTALLFOLDER">
+        <File Id="fil.DeviceHubMiniServiceExe"
+              Source="$(var.PublishDir)DeviceHubMini.Service.exe"
+              KeyPath="yes" />
+
+        <ServiceInstall
+            Id="svc.Install"
+            Name="DeviceHubMiniService"
+            DisplayName="DeviceHubMini Service"
+            Description="Background service that manages device hub tasks."
+            Type="ownProcess"
+            Start="auto"
+            ErrorControl="normal"
+            Account="LocalSystem" />
+
+        <ServiceControl
+            Id="svc.Control"
+            Name="DeviceHubMiniService"
+            Start="install"
+            Stop="both"
+            Remove="uninstall"
+            Wait="yes" />
+      </Component>
+
+      <!-- Appsettings.json (Permanent so config changes are preserved) -->
+      <Component Id="cmp.AppSettings" Directory="INSTALLFOLDER" Permanent="yes">
+        <File Id="fil.AppSettings"
+              Source="$(var.PublishDir)appsettings.json"
+              KeyPath="yes" />
+      </Component>
+      <Component Id="cmp.Dependencies" Directory="INSTALLFOLDER"  Permanent="yes">
+        <File Source="$(var.PublishDir)e_sqlite3.dll"  KeyPath="yes"  />
+        <!-- Add more DLLs if needed -->
+      </Component>
+    
+
+    </ComponentGroup>
+  </Fragment>
+</Wix>

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Package
+      Id="DeviceHubMini.Service"
+      Name="DeviceHubMini Service"
+      Manufacturer="DeviceHubMini"
+      Version="1.0.0.0"
+      Scope="perMachine"
+      UpgradeCode="a1234567-89ab-4cde-bf01-abcdef123456">
+
+    <MajorUpgrade
+        AllowSameVersionUpgrades="no"
+        DowngradeErrorMessage="A newer version of DeviceHubMini Service is already installed." />
+
+    <Feature Id="MainFeature" Title="DeviceHubMini Service" Level="1">
+      <ComponentGroupRef Id="ServiceComponents" />
+    </Feature>
+
+  </Package>
+</Wix>
