@@ -132,7 +132,7 @@ public class Program
     private static void ConfigureLogging(IConfiguration configuration)
     {
         // Read base log folder from configuration or fallback to default
-        var logDirectory = configuration["Logging:LogFilePath"]?? _baseDir;
+        var logDirectory = configuration["Logging:LogFilePath"] ?? _baseDir;
 
         if (!string.IsNullOrWhiteSpace(logDirectory))
         {
@@ -188,15 +188,19 @@ public class Program
                 services.AddSingleton<IConnectionFactory, SqlLiteConnectionFactory>();
                 services.AddSingleton<IRepository, DapperRepository>();
                 services.AddSingleton<IScanDataEventRepository, ScanDataEventRepository>();
-                
+
                 // Configure resilient HTTP client
-                services.AddHttpClient(nameof(GraphQLClientService))
-                .SetHandlerLifetime(TimeSpan.FromMinutes(5))
-                .AddPolicyHandler(Policy.TimeoutAsync<HttpResponseMessage>(10))
-                .AddPolicyHandler(GetRetryPolicy());
+                services.AddHttpClient<IGraphQLClientService, GraphQLClientService>((sp, client) =>
+                {
+                    client.BaseAddress = new Uri(_appSettings.GraphQLUrl);
+                    client.DefaultRequestHeaders.Add("x-api-key", _appSettings.GraphQLApiKey);
+                })
+                 .SetHandlerLifetime(TimeSpan.FromMinutes(5))
+                 .AddPolicyHandler(Policy.TimeoutAsync<HttpResponseMessage>(10))
+                 .AddPolicyHandler(GetRetryPolicy());
 
                 services.AddSingleton<IEventDispatcherService, EventDispatcherService>();
-                services.AddSingleton<IGraphQLClientService, GraphQLClientService>();
+
 
                 // Here we can inject the DI (file wacher, bluetooth scanner)
                 if (_appSettings.ScannerType?.Equals("Bluetooth", StringComparison.OrdinalIgnoreCase) == true)

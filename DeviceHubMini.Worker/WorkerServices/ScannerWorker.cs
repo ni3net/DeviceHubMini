@@ -1,13 +1,11 @@
 ﻿using DeviceHubMini.Common.Contracts;
+using DeviceHubMini.Infrastructure.Contracts;
 using DeviceHubMini.Infrastructure.Entities;
 using DeviceHubMini.Jobs.Interface;
-using DeviceHubMini.Model;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DeviceHubMini.Worker.WorkerServices
@@ -15,16 +13,16 @@ namespace DeviceHubMini.Worker.WorkerServices
     public sealed class ScannerWorker : BackgroundService
     {
         private readonly IScanDevice _scanner;
-        private readonly IRepository _repository;
+        private readonly IScanDataEventRepository _eventRepository;
         private readonly ILogger<ScannerWorker> _logger;
 
         public ScannerWorker(
             IScanDevice scanner,
-            IRepository repository,
+            IScanDataEventRepository eventRepository,
             ILogger<ScannerWorker> logger)
         {
             _scanner = scanner ?? throw new ArgumentNullException(nameof(scanner));
-            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+            _eventRepository = eventRepository ?? throw new ArgumentNullException(nameof(eventRepository));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
@@ -32,7 +30,6 @@ namespace DeviceHubMini.Worker.WorkerServices
         {
             _logger.LogInformation("ScannerWorker started. Listening for scanned events...");
 
-            // Attach event handler for scan device
             _scanner.OnScan += async (_, e) =>
             {
                 try
@@ -48,19 +45,13 @@ namespace DeviceHubMini.Worker.WorkerServices
                         CreatedAt = DateTimeOffset.UtcNow
                     };
 
-                    const string sql = @"
-INSERT INTO ScanEvents
-(EventId, RawData, Timestamp, DeviceId, Status, Attempts, CreatedAt)
-VALUES (@EventId, @RawData, @Timestamp, @DeviceId, @Status, @Attempts, @CreatedAt);";
-
-                    // Use repository to insert event
-                    await _repository.ExecuteAsync(sql, scanEvent);
+                    await _eventRepository.AddScanEventAsync(scanEvent);
 
                     _logger.LogInformation("Inserted scan event {EventId} from device {DeviceId}", scanEvent.EventId, scanEvent.DeviceId);
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex, "Error inserting scanned event into SQLite");
+                    _logger.LogError(ex, "Error saving scanned event from device {DeviceId}", e.SourceDeviceId);
                 }
             };
 
@@ -75,5 +66,4 @@ VALUES (@EventId, @RawData, @Timestamp, @DeviceId, @Status, @Attempts, @CreatedA
             await base.StopAsync(cancellationToken);
         }
     }
-
 }

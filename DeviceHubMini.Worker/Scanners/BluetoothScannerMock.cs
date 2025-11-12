@@ -40,7 +40,7 @@ namespace DeviceHubMini.Worker.Scanners
                 {
                     try
                     {
-                        // Simulate scan every 2–5 seconds
+                        // Simulate scan every 3–5 seconds
                         var delay = random.Next(2000, 5000);
                         await Task.Delay(delay, ct);
 

@@ -10,5 +10,6 @@ namespace DeviceHubMini.Infrastructure.Contracts
         Task<IEnumerable<ScanEventEntity>> GetPendingEventsAsync(int limit = 25);
         Task MarkAsSentAsync(string eventId, DateTimeOffset sentAt);
         Task MarkAsFailedAsync(string eventId, string errorMessage);
+        Task AddScanEventAsync(ScanEventEntity scanEvent);  
     }
 }

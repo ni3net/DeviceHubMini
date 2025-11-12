@@ -52,5 +52,15 @@ WHERE EventId = @EventId;";
 
             await _repository.ExecuteAsync(sql, new { EventId = eventId, Error = errorMessage });
         }
+
+        public async Task AddScanEventAsync(ScanEventEntity scanEvent)
+        {
+            const string sql = @"
+INSERT INTO ScanEvents
+(EventId, RawData, Timestamp, DeviceId, Status, Attempts, CreatedAt)
+VALUES (@EventId, @RawData, @Timestamp, @DeviceId, @Status, @Attempts, @CreatedAt);";
+
+            await _repository.ExecuteAsync(sql, scanEvent);
+        }
     }
 }

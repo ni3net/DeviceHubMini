@@ -20,8 +20,8 @@ namespace DeviceHubMini.Infrastructure.Services
     {
         private readonly HttpClient _httpClient;
         private readonly ILogger<GraphQLClientService> _logger;
-        private readonly string _graphqlUrl;
-        private readonly string _apiKey;
+        //private readonly string _graphqlUrl;
+        //private readonly string _apiKey;
 
         public GraphQLClientService(
             HttpClient httpClient,
@@ -30,16 +30,16 @@ namespace DeviceHubMini.Infrastructure.Services
         {
             _httpClient = httpClient;
             _logger = logger;
-            _graphqlUrl = appSettings.GraphQLUrl;
-            _apiKey = appSettings.GraphQLApiKey;
+            //_graphqlUrl = appSettings.GraphQLUrl;
+            //_apiKey = appSettings.GraphQLApiKey;
 
-            // optional: set base address for convenience
-            if (!string.IsNullOrWhiteSpace(_graphqlUrl))
-                _httpClient.BaseAddress = new Uri(_graphqlUrl);
+            //// optional: set base address for convenience
+            //if (!string.IsNullOrWhiteSpace(_graphqlUrl))
+            //    _httpClient.BaseAddress = new Uri(_graphqlUrl);
 
-            // set shared headers
-            if (!string.IsNullOrWhiteSpace(_apiKey))
-                _httpClient.DefaultRequestHeaders.Add("x-api-key", _apiKey);
+            //// set shared headers
+            //if (!string.IsNullOrWhiteSpace(_apiKey))
+            //    _httpClient.DefaultRequestHeaders.Add("x-api-key", _apiKey);
         }
 
         /// <summary>
