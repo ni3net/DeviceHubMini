@@ -6,19 +6,19 @@ WORKDIR /src
 
 # Copy solution and project files
 COPY ["DeviceHubMini.sln", "./"]
-COPY ["DeviceHubMini/DeviceHubMini.Service.csproj", "DeviceHubMini/"]
+COPY ["DeviceHubMini.Service/DeviceHubMini.Service.csproj", "DeviceHubMini.Service/"]
 COPY ["DeviceHubMini.Common/DeviceHubMini.Common.csproj", "DeviceHubMini.Common/"]
-COPY ["DeviceHubMini.Model/DeviceHubMini.Infrastructure.csproj", "DeviceHubMini.Model/"]
+COPY ["DeviceHubMini.Infrastructure/DeviceHubMini.Infrastructure.csproj", "DeviceHubMini.Infrastructure/"]
 COPY ["DeviceHubMini.Worker/DeviceHubMini.Worker.csproj", "DeviceHubMini.Worker/"]
 
 # Restore dependencies
-RUN dotnet restore "DeviceHubMini/DeviceHubMini.Service.csproj"
+RUN dotnet restore "DeviceHubMini.Service/DeviceHubMini.Service.csproj"
 
 # Copy everything
 COPY . .
 
 # Build and publish
-WORKDIR "/src/DeviceHubMini"
+WORKDIR "/src/DeviceHubMini.Service"
 RUN dotnet publish "DeviceHubMini.Service.csproj" -c Release -o /app/publish
 
 # ============================================
@@ -31,6 +31,6 @@ ENV ASPNETCORE_URLS=http://+:8080
 ENV DOTNET_ENVIRONMENT=Development
 EXPOSE 8080
 ENTRYPOINT ["dotnet", "DeviceHubMini.Service.dll"]
-#docker build -f DeviceHubMini/Dockerfile -t devicehubmini:latest .
+#docker build -f DeviceHubMini.Service/Dockerfile -t devicehubmini:latest .
 #docker run -it -p 5159:8080 -v "C:\Users\ni3ne\source\repos\DeviceHubMini\containerMount:/app"  --name devicehubmini devicehubmini:latest
 #docker exec -it devicehubmini /bin/sh

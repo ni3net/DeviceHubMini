@@ -3,7 +3,7 @@
      xmlns:util="http://wixtoolset.org/schemas/v4/wxs/util">
 
   <!-- Define publish output directory -->
-  <?define PublishDir = "C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini\bin\Release\net8.0\publish\win-x64\" ?>
+  <?define PublishDir = "C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Service\bin\Release\net8.0\publish\win-x64\" ?>
 
   <Fragment>
     <ComponentGroup Id="ServiceComponents">

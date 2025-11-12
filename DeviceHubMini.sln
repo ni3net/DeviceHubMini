@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36518.9
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeviceHubMini.Service", "DeviceHubMini\DeviceHubMini.Service.csproj", "{BA284F05-0EF0-4A64-BB7E-768F3C0C44AE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeviceHubMini.Service", "DeviceHubMini.Service\DeviceHubMini.Service.csproj", "{BA284F05-0EF0-4A64-BB7E-768F3C0C44AE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeviceHubMini.Common", "DeviceHubMini.Common\DeviceHubMini.Common.csproj", "{3A9EE203-26DB-49C7-9B67-979DD07E95D8}"
 EndProject
