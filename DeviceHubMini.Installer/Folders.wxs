@@ -3,8 +3,19 @@
   <Fragment>
     <Directory Id="ProgramFiles64Folder">
       <Directory Id="DIR_Company" Name="DeviceHubMini">
-        <Directory Id="INSTALLFOLDER" Name="DeviceHubMini Service" />
+        <Directory Id="INSTALLFOLDER" Name="DeviceHubMini">
+          <Directory Id="DIR_Service" Name="Service" />
+          <Directory Id="DIR_Tray" Name="Tray" >
+            <Directory Id="DIR_TrayAssets" Name="Assets" />
+          </Directory>
+          </Directory>
       </Directory>
     </Directory>
+
+    <!-- Start Menu shortcuts -->
+    <Directory Id="ProgramMenuFolder">
+      <Directory Id="DIR_TrayShortcut" Name="DeviceHubMini" />
+    </Directory>
+
   </Fragment>
 </Wix>

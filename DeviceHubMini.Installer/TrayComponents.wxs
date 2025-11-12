@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+     xmlns:util="http://wixtoolset.org/schemas/v4/wxs/util">
+
+  <?define TrayPublishDir = "C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tray\bin\Release\net8.0-windows\publish\win-x64\" ?>
+  <?define TrayExeName = "DeviceHubMini.Tray.exe" ?>
+  <?define TrayAppDisplayName = "DeviceHubMini Tray" ?>
+  <?define TrayRunRegistryKey = "DeviceHubMiniTray" ?>
+
+  <Fragment>
+    <Icon Id="TrayRunningIcon" SourceFile="$(var.TrayPublishDir)Assets\icon-running.ico" />
+
+    <!-- 🔹 Define Components -->
+    <ComponentGroup Id="TrayComponents">
+
+      <!-- 1️⃣ Tray Executable -->
+      <Component Id="cmp.TrayExe" Directory="DIR_Tray" Guid="*">
+        <File Id="fil.TrayExe"
+              Source="$(var.TrayPublishDir)$(var.TrayExeName)"
+              KeyPath="yes" />
+      </Component>
+      
+      <Component Id="cmp.IconError" Directory="DIR_TrayAssets" Guid="*" >
+        <File Id="IconError"
+              Source="$(var.TrayPublishDir)Assets\icon-error.ico"
+              KeyPath="yes" />
+      </Component>
+        <Component Id="cmp.IconRunning" Directory="DIR_TrayAssets" Guid="*" >
+        <File Id="IconRunning"
+              Source="$(var.TrayPublishDir)Assets\icon-running.ico"
+              KeyPath="yes" />
+          
+        
+      </Component>
+      
+        <Component Id="cmp.IconStopped" Directory="DIR_TrayAssets" Guid="*" >
+          <File Id="IconStopped"    Source="$(var.TrayPublishDir)Assets\icon-stopped.ico"
+            KeyPath="yes" />
+      </Component>
+      <Component Id="cmp.LaunchTrayOnce" Directory="DIR_Tray" Guid="*">
+        <RegistryValue
+            Root="HKCU"
+            Key="Software\Microsoft\Windows\CurrentVersion\RunOnce"
+            Name="LaunchDeviceHubMiniTray"
+            Value="&quot;[DIR_Tray]DeviceHubMini.Tray.exe&quot;"
+            Type="string"
+            KeyPath="yes" />
+      </Component>
+      <!-- 3️⃣ Shortcuts -->
+      <Component Id="cmp.TrayShortcuts" Directory="DIR_Tray" Guid="*">
+        <RegistryValue
+            Root="HKCU"
+            Key="Software\MyCompany\DeviceHubMini"
+            Name="TrayShortcutKey"
+            Value="1"
+            Type="integer"
+            KeyPath="yes" />
+
+        <Shortcut Id="TrayShortcut"
+                  Directory="DIR_TrayShortcut"
+                  Name="$(var.TrayAppDisplayName)"
+                  Target="[DIR_Tray]$(var.TrayExeName)"
+                  WorkingDirectory="DIR_Tray"
+                 Icon="TrayRunningIcon"
+                  Advertise="no" />
+
+        <Shortcut Id="TrayDesktopShortcut"
+                  Directory="DesktopFolder"
+                  Name="$(var.TrayAppDisplayName)"
+                  Target="[DIR_Tray]$(var.TrayExeName)"
+                 Icon="TrayRunningIcon"
+                  
+                  />
+        <RemoveFolder Id="RemoveTrayShortcutDir" Directory="DIR_TrayShortcut" On="uninstall" />
+
+      </Component>
+
+      <!-- 4️⃣ Auto-Run on Login -->
+      <Component Id="cmp.TrayAutoRun" Directory="DIR_Tray" Guid="*">
+        <RegistryValue
+            Root="HKCU"
+            Key="Software\Microsoft\Windows\CurrentVersion\Run"
+            Name="$(var.TrayRunRegistryKey)"
+            Value="[DIR_Tray]$(var.TrayExeName)"
+            Type="string"
+            KeyPath="yes" />
+      </Component>
+
+    </ComponentGroup>
+    <CustomAction Id="EXECUTE_AFTER_FINALIZE"
+                 Execute="immediate"
+                 Impersonate="yes"
+                 Return="ignore"
+                 FileRef="fil.TrayExe"
+                 ExeCommand="" 
+                  />
+    <InstallExecuteSequence>
+      <Custom Action="EXECUTE_AFTER_FINALIZE" After="InstallFinalize" Condition="NOT Installed" />
+    </InstallExecuteSequence>
+    
+    
+  </Fragment>
+</Wix>

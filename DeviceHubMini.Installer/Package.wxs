@@ -11,10 +11,16 @@
     <MajorUpgrade
         AllowSameVersionUpgrades="no"
         DowngradeErrorMessage="A newer version of DeviceHubMini Service is already installed." />
-
+    
+    <Icon Id="errorico"   SourceFile="C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tray\bin\Release\net8.0-windows\publish\win-x64\Assets\icon-error.ico" />
+    <Icon Id="runningico"      SourceFile="C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tray\bin\Release\net8.0-windows\publish\win-x64\Assets\icon-running.ico" />
+    <Icon Id="stoppedico"      SourceFile="C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tray\bin\Release\net8.0-windows\publish\win-x64\Assets\icon-stopped.ico" />
+   
     <Feature Id="MainFeature" Title="DeviceHubMini Service" Level="1">
       <ComponentGroupRef Id="ServiceComponents" />
+      <ComponentGroupRef Id="TrayComponents" />
     </Feature>
+     
 
   </Package>
 </Wix>
