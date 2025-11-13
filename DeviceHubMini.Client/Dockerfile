@@ -28,6 +28,6 @@ ENV ASPNETCORE_URLS=http://+:8080
 
 ENTRYPOINT ["dotnet", "DeviceHubMini.Client.dll"]
 # docker build -t devicehub-client:latest .
-#docker run -d -p 5068:8080  --name devicehub-clientService devicehub-client 
+#docker run -it -p 5068:8080  --name devicehub-clientService devicehub-client 
 #docker exec -it devicehub-clientService /bin/bash
 #docker exec -it devicehub-clientService /bin/sh

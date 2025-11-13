@@ -28,9 +28,9 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
 COPY --from=build /app/publish .
 ENV ASPNETCORE_URLS=http://+:8080
-ENV DOTNET_ENVIRONMENT=Development
+ENV DOTNET_ENVIRONMENT=Production
 EXPOSE 8080
 ENTRYPOINT ["dotnet", "DeviceHubMini.Service.dll"]
 #docker build -f DeviceHubMini.Service/Dockerfile -t devicehubmini:latest .
-#docker run -it -p 5159:8080 -v "C:\Users\ni3ne\source\repos\DeviceHubMini\containerMount:/app"  --name devicehubmini devicehubmini:latest
+#docker run -it -p 5159:8080   --name devicehubmini devicehubmini:latest  prod-key-123
 #docker exec -it devicehubmini /bin/sh

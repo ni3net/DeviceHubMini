@@ -1,0 +1,51 @@
+version: "3.9"
+
+services:
+  devicehubmini-client:
+    container_name: devicehubmini-client
+    image: devicehubmini-client:latest
+    build:
+      context: ./DeviceHubMini.Client
+      dockerfile: Dockerfile
+
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Production"
+      ASPNETCORE_URLS: "http://+:8080"
+
+    ports:
+      - "5068:8080" # GraphQL API exposed to host
+
+    restart: unless-stopped
+
+  devicehubmini-service:
+    container_name: devicehubmini-service
+    image: devicehubmini-service:latest
+    build:
+      context: .
+      dockerfile: DeviceHubMini.Service/Dockerfile
+
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Production"
+      ASPNETCORE_URLS: "http://+:8080"
+
+      # 👇 DO NOT USE host.docker.internal INSIDE DOCKER
+      # Use Docker DNS service-to-service call
+      GraphQLUrl: "http://devicehubmini-client:8080/graphql"
+
+      # First-run bootstrap key
+      API_KEY: "prod-key-999"
+
+    ports:
+      - "5069:8080" # Exposed for debugging only (Optional)
+
+    command: ["prod-key-123"]
+
+    volumes:
+      - devicehub_data:/app/data
+
+    restart: unless-stopped
+    depends_on:
+      - devicehubmini-client
+
+volumes:
+  devicehub_data:

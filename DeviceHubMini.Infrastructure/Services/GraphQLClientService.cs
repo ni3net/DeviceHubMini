@@ -13,7 +13,7 @@ using Microsoft.Extensions.Logging;
 namespace DeviceHubMini.Infrastructure.Services
 {
     /// <summary>
-    /// Handles all communication with the GraphQL backend — 
+    /// Handles all communication with the GraphQL backend ï¿½ 
     /// includes both configuration fetch and event submission.
     /// </summary>
     public sealed class GraphQLClientService : IGraphQLClientService
@@ -30,16 +30,6 @@ namespace DeviceHubMini.Infrastructure.Services
         {
             _httpClient = httpClient;
             _logger = logger;
-            //_graphqlUrl = appSettings.GraphQLUrl;
-            //_apiKey = appSettings.GraphQLApiKey;
-
-            //// optional: set base address for convenience
-            //if (!string.IsNullOrWhiteSpace(_graphqlUrl))
-            //    _httpClient.BaseAddress = new Uri(_graphqlUrl);
-
-            //// set shared headers
-            //if (!string.IsNullOrWhiteSpace(_apiKey))
-            //    _httpClient.DefaultRequestHeaders.Add("x-api-key", _apiKey);
         }
 
         /// <summary>
@@ -100,7 +90,8 @@ mutation ($input: ScanInput!) {
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error sending event {EventId} to GraphQL", ev.EventId);
+                //  _logger.LogError(ex, "Error sending event {EventId} to GraphQL", ev.EventId);
+                _logger.LogError("Error sending event {EventId} to GraphQL", ev.EventId);
                 return false;
             }
         }
@@ -142,7 +133,8 @@ query ($deviceId: String!) {
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error fetching configuration for {DeviceId}", deviceId);
+                _logger.LogError("Error fetching configuration for {DeviceId}", deviceId);
+                //_logger.LogError(ex, "Error fetching configuration for {DeviceId}", deviceId);
                 return null;
             }
         }

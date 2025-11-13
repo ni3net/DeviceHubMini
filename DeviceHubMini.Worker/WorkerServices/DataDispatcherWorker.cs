@@ -45,6 +45,7 @@ namespace DeviceHubMini.Worker.WorkerServices
                 }
                 catch (Exception ex)
                 {
+                    // _logger.LogError(ex, "Dispatcher failed  will retry automatically.");
                     _logger.LogError(ex, "Dispatcher failed  will retry automatically.");
                 }
 

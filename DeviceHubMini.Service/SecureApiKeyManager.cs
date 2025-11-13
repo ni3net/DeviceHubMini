@@ -7,52 +7,73 @@ namespace DeviceHubMini.Security
 {
     public static class SecureApiKeyManager
     {
-       
+
         /// <summary>
         /// Loads the API key securely (DPAPI). If not found, bootstraps from env var and stores encrypted.
         /// </summary>
-        public static string LoadOrCreateApiKey(string KeyFilePath,string bootstrapKey)
+        public static string LoadOrCreateApiKey(string keyFilePath, string bootstrapKey)
         {
-            if (File.Exists(KeyFilePath))
+            // 1. If key already stored → load it
+            if (File.Exists(keyFilePath))
             {
-                var encrypted = File.ReadAllBytes(KeyFilePath);
-                var decrypted = ProtectedData.Unprotect(encrypted, null, DataProtectionScope.LocalMachine);
-                return Encoding.UTF8.GetString(decrypted);
+                var encrypted = File.ReadAllBytes(keyFilePath);
+
+                if (OperatingSystem.IsWindows())
+                {
+                    var decrypted = ProtectedData.Unprotect(encrypted, null, DataProtectionScope.LocalMachine);
+                    return Encoding.UTF8.GetString(decrypted);
+                }
+                else
+                {
+                    // Non-Windows: return as plain text (or AES decrypt)
+                    return Encoding.UTF8.GetString(encrypted);
+                }
             }
 
-            // Use bootstrap key if provided
+            // 2. First-time initialization
             if (string.IsNullOrWhiteSpace(bootstrapKey))
-                throw new InvalidOperationException("API key missing. Pass it during installation or first startup.");
+                throw new InvalidOperationException(
+                    "API key missing. Provide key during installation or first startup."
+                );
 
-            SaveApiKey(KeyFilePath,bootstrapKey);
+            // 3. Save key securely (Windows) or plain (non-Windows)
+            SaveApiKey(keyFilePath, bootstrapKey);
+
             return bootstrapKey;
         }
+
 
 
         /// <summary>
         /// Encrypts and stores the API key using DPAPI.
         /// </summary>
-        public static void SaveApiKey(string KeyFilePath, string apiKey)
+        public static void SaveApiKey(string keyFilePath, string apiKey)
         {
-            Directory.CreateDirectory(Path.GetDirectoryName(KeyFilePath)!);
-
+            Directory.CreateDirectory(Path.GetDirectoryName(keyFilePath)!);
             var data = Encoding.UTF8.GetBytes(apiKey);
-            var encrypted = ProtectedData.Protect(data, null, DataProtectionScope.LocalMachine);
-            File.WriteAllBytes(KeyFilePath, encrypted);
+
+            byte[] toWrite;
+
+            if (OperatingSystem.IsWindows())
+            {
+                toWrite = ProtectedData.Protect(data, null, DataProtectionScope.LocalMachine);
+            }
+            else
+            {
+                // On Linux / Docker store raw text or implement AES
+                toWrite = data;
+            }
+
+            File.WriteAllBytes(keyFilePath, toWrite);
         }
+
 
         public static string GetApiKeysFromArugments(string[] args)
         {
-            string? bootstrapApiKey = string.Empty;
-            for (int i = 0; i < args.Length; i++)
-            {
-                if (args[i].Equals("--apikey", StringComparison.OrdinalIgnoreCase) && i + 1 < args.Length)
-                {
-                    bootstrapApiKey = args[i + 1];
-                    break;
-                }
-            }
-            return bootstrapApiKey;
+            if (args != null && args.Length > 0 && !string.IsNullOrWhiteSpace(args[0]))
+                return args[0].Trim();
+
+            return string.Empty;
         }
     }
 }

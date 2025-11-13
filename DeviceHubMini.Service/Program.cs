@@ -33,8 +33,9 @@ public class Program
     {
         try
         {
-            //var environment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT") ?? "Production";
-            var environment = "Development";
+
+            var environment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT") ?? "Development";
+
             Console.WriteLine($"Current environment: {environment}");
 
             // Load configuration
