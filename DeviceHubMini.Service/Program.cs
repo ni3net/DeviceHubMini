@@ -52,6 +52,7 @@ public class Program
 
             // Build and run host
             var host = CreateHostBuilder(args, configuration).Build();
+
             await host.RunAsync();
         }
         catch (Exception ex)
@@ -219,6 +220,9 @@ public class Program
                 services.AddHostedService<ConfigWatcherWorker>();
                 services.AddHostedService<ScannerWorker>();
                 services.AddHostedService<DataDispatcherWorker>();
+
+                services.AddHostedService<AppSettingsLogger>();
+
             });
 
     private static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()

@@ -177,40 +177,25 @@ DeviceHubMini.Client
 
 ## 🐋 Docker Setup
 
-### Service Container
+### Run both Container
+Run Below commands on Solution folder
+```shell
+docker compose build &&
+docker compose up -d
+```
+### Service Container network up and  down commands
 
 ```shell
-docker stop devicehubmini 2>nul && docker rm devicehubmini 2>nul &&
-docker build -f DeviceHubMini/Dockerfile -t devicehubmini:latest . &&
-docker run -it -p 5159:8080 -e DOTNET_ENVIRONMENT=Development `
--v "C:\Users\ni3ne\source\repos\DeviceHubMini\containerMount:/mnt/data" ` // provide the mount dir path
---name devicehubmini devicehubmini:latest
+
+docker exec -u root devicehubmini-service iptables -A OUTPUT -d 0.0.0.0/0 -j DROP
+docker exec -u root devicehubmini-service iptables -F OUTPUT
 ```
-
-**Explanation:**
-
-- Builds and runs the service container.
-- Mounts `containerMount` to `/mnt/data` for reading input files.
-- Exposes port 5159.
-- Auto-removes old container before build.
-
----
-
-### Client Container
-
+### Service Container mannual start to test the duplicate 
 ```shell
-docker stop devicehub-clientService 2>nul & docker rm devicehub-clientService 2>nul &
-docker build -t devicehub-client:latest . &
-docker run -it -p 5068:8080 --name devicehub-clientService devicehub-client:latest
+docker exec -it devicehubmini-service sh
+dotnet DeviceHubMini.Service.dll prod-key-123
 ```
 
-**Explanation:**
-
-- Builds and runs the GraphQL mock client.
-- Listens on port 5068.
-- Used as the backend for the service container.
-
----
 
 ### Container Utilities
 
@@ -221,6 +206,22 @@ docker run -it -p 5068:8080 --name devicehub-clientService devicehub-client:late
   `cp sample/sample01.txt input/`
 
 ---
+
+📦 devicehub_data Summary
+
+devicehub_data is a host-mounted storage folder used by the service container to persist all important runtime files.
+This ensures data is not lost when the container restarts or is rebuilt.
+
+Inside this folder, the service stores:
+
+DeviceHubMiniService.db → SQLite database
+
+apiKey.bin → Stored API key (persisted after first run)
+
+Logs/ → Application logs
+
+input/ → Input files for processing
+
 
 ## 🪟 Batch Installer (`Utility.bat`)
 

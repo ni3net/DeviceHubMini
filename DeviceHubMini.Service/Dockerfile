@@ -25,6 +25,11 @@ RUN dotnet publish "DeviceHubMini.Service.csproj" -c Release -o /app/publish
 # Runtime stage
 # ============================================
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
+
+# Install tools needed for networking commands
+RUN apt-get update && apt-get install -y iproute2 iputils-ping iptables && apt-get clean
+
+
 WORKDIR /app
 COPY --from=build /app/publish .
 ENV ASPNETCORE_URLS=http://+:8080

@@ -18,6 +18,8 @@ services:
     restart: unless-stopped
 
   devicehubmini-service:
+    cap_add:
+      - NET_ADMIN
     container_name: devicehubmini-service
     image: devicehubmini-service:latest
     build:
@@ -28,9 +30,9 @@ services:
       ASPNETCORE_ENVIRONMENT: "Production"
       ASPNETCORE_URLS: "http://+:8080"
 
-      # 👇 DO NOT USE host.docker.internal INSIDE DOCKER
       # Use Docker DNS service-to-service call
       GraphQLUrl: "http://devicehubmini-client:8080/graphql"
+      ScannerType: "Bluetooth"
 
       # First-run bootstrap key
       API_KEY: "prod-key-999"
@@ -38,10 +40,16 @@ services:
     ports:
       - "5069:8080" # Exposed for debugging only (Optional)
 
-    command: ["prod-key-123"]
+    ## test duplicate start
+    entrypoint: ["/bin/sh"]
+    command: ["-c", "while true; do sleep 3600; done"]
+    ## test duplicate end
+
+    # Normal mode
+    # command: ["prod-key-123"]
 
     volumes:
-      - devicehub_data:/app/data
+      - ./devicehub_data/Service:/usr/share/DeviceHubMini
 
     restart: unless-stopped
     depends_on:
