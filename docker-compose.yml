@@ -32,7 +32,7 @@ services:
 
       # Use Docker DNS service-to-service call
       GraphQLUrl: "http://devicehubmini-client:8080/graphql"
-      ScannerType: "Bluetooth"
+      ScannerType: "File"
 
       # First-run bootstrap key
       API_KEY: "prod-key-999"
