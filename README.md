@@ -5,6 +5,18 @@ Supports both FileWatcher and Bluetooth scanners using configuration-based switc
 
 ---
 
+
+##  Recording & Process Documents
+
+The following resources are included for reference:
+
+Recording Folder: DeviceHubMini.Service/Recording
+
+Normal Process Documentation: DeviceHubMini.Service/Normal Process.docx
+
+These files contain step-by-step visuals and detailed explanations of how to execute each scenario.
+
+
 ## 🚀 Overview
 
 ### Components
@@ -203,7 +215,7 @@ dotnet DeviceHubMini.Service.dll prod-key-123
   `docker exec -it devicehubmini /bin/bash`
 
 - **Copy Sample File to Input Watch Folder:**  
-  `cp sample/sample01.txt input/`
+  `cp sample/sample01.txt DeviceHubMini/input/`
 
 ---
 

@@ -49,7 +49,7 @@ services:
     # command: ["prod-key-123"]
 
     volumes:
-      - ./devicehub_data/Service:/usr/share/DeviceHubMini
+      - ./devicehub_data/Service/:/app/DeviceHubMini/db
 
     restart: unless-stopped
     depends_on:

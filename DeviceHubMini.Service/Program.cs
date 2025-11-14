@@ -35,7 +35,7 @@ public class Program
         {
 
             var environment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT") ?? "Development";
-
+           
             Console.WriteLine($"Current environment: {environment}");
 
             // Load configuration
@@ -93,7 +93,12 @@ public class Program
         if (environment.Equals("Production", StringComparison.OrdinalIgnoreCase))
         {
             // Always use ProgramData for Production
-            var programData = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+            var programData = string.Empty;
+            if (OperatingSystem.IsWindows())
+            {
+                programData = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+            }
+
             _baseDir = Path.Combine(programData, "DeviceHubMini");
         }
         else if (!string.IsNullOrWhiteSpace(basePath) && hasDriveLetter)
@@ -119,7 +124,8 @@ public class Program
         // Update DB and API key file only for Production
         if (environment.Equals("Production", StringComparison.OrdinalIgnoreCase))
         {
-            _appSettings.ServiceDbConnection = $"Data Source={Path.Combine(_baseDir, $"{_appSettings.ServiceName}.db")}";
+            _appSettings.ServiceDbConnection = $"Data Source={Path.Combine(_baseDir,"db", $"{_appSettings.ServiceName}.db")}";
+            Directory.CreateDirectory(Path.Combine(_baseDir, "db"));
             var keyFilePath = Path.Combine(_baseDir, "apiKey.bin");
 
             _appSettings.GraphQLApiKey = SecureApiKeyManager.LoadOrCreateApiKey(
