@@ -22,7 +22,9 @@
             Type="ownProcess"
             Start="auto"
             ErrorControl="normal"
-            Account="LocalSystem" />
+            Account="LocalSystem"
+            Arguments='"[SECURITY_KEY]"'
+            />
 
         <ServiceControl
             Id="svc.Control"
@@ -31,13 +33,26 @@
             Stop="both"
             Remove="uninstall"
             Wait="yes" />
-      </Component>
+        
+        <RegistryKey Root="HKLM"
+                     Key="SYSTEM\CurrentControlSet\Services\DeviceHubMiniService\Environment">
+          <RegistryValue Name="DOTNET_ENVIRONMENT"
+                         Value="Production"
+                         Type="string" />
+        </RegistryKey>
 
+      </Component>
+      
       <!-- Appsettings.json (Permanent so config changes are preserved) -->
       <Component Id="cmp.AppSettings" Directory="INSTALLFOLDER" Permanent="yes">
         <File Id="fil.AppSettings"
               Source="$(var.PublishDir)appsettings.json"
               KeyPath="yes" />
+      </Component>
+        <Component Id="cmp.ProdAppSettings" Directory="INSTALLFOLDER" Permanent="yes">
+          <File Id="fil.ProdAppSettings"
+                Source="$(var.PublishDir)appsettings.Production.json"
+                KeyPath="yes" />
       </Component>
       <Component Id="cmp.Dependencies" Directory="INSTALLFOLDER"  Permanent="yes">
         <File Source="$(var.PublishDir)e_sqlite3.dll"  KeyPath="yes"  />

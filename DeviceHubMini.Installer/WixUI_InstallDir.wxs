@@ -58,19 +58,9 @@
       <!-- SecurityKeyDlg -->
       <Publish Dialog="SecurityKeyDlg_Custom" Control="Back" Event="NewDialog" Value="WelcomeDlg" />
 
-      <!-- If key empty -> show Error dialog -->
-      <Publish Dialog="SecurityKeyDlg_Custom"
-               Control="Next"
-               Event="SpawnDialog"
-               Value="ErrorDlg"
-               Condition="SECURITY_KEY = &quot;&quot;" />
-
-      <!-- If key NOT empty -> go to InstallDir -->
-      <Publish Dialog="SecurityKeyDlg_Custom"
-               Control="Next"
-               Event="NewDialog"
-               Value="InstallDirDlg"
-               Condition="SECURITY_KEY &lt;&gt; &quot;&quot;" />
+      <Publish Dialog="SecurityKeyDlg_Custom" Control="Next"
+               Event="NewDialog" Value="InstallDirDlg"
+               Condition="SECURITY_KEY_VALID = &quot;1&quot;" />
 
       <!-- InstallDir dialog navigation -->
       <Publish Dialog="InstallDirDlg" Control="Back" Event="NewDialog" Value="SecurityKeyDlg_Custom" />

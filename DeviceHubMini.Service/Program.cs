@@ -34,14 +34,14 @@ public class Program
         try
         {
 
-            var environment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT") ?? "Development";
+            var environment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT") ?? "Production";
            
             Console.WriteLine($"Current environment: {environment}");
 
             // Load configuration
             var configuration = BuildConfiguration(environment);
             configuration.Bind(_appSettings);
-
+            _appSettings.Enviroment = environment;
             // Setup base directory
             InitializeBaseDirectory(environment, args);
 

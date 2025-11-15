@@ -2,12 +2,10 @@
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
 
   <Fragment>
-
     <UI>
 
       <Dialog Id="SecurityKeyDlg_Custom" Width="370" Height="270" Title="Enter Security Key">
 
-        <!-- Banner -->
         <Control Id="BannerBitmap" Type="Bitmap"
                  X="0" Y="0" Width="370" Height="44"
                  Text="!(loc.LicenseAgreementDlgBannerBitmap)" />
@@ -15,48 +13,79 @@
         <Control Id="BannerLine" Type="Line" X="0" Y="44" Width="370" Height="0" />
         <Control Id="BottomLine" Type="Line" X="0" Y="234" Width="370" Height="0" />
 
-        <!-- Title -->
         <Control Id="Title" Type="Text"
                  X="15" Y="6" Width="250" Height="15"
                  Transparent="yes" NoPrefix="yes"
                  Text="Enter Security Key" />
 
-        <!-- Description -->
         <Control Id="Description" Type="Text"
                  X="25" Y="23" Width="330" Height="15"
                  Transparent="yes" NoPrefix="yes"
                  Text="Please enter your security key to continue." />
 
-        <!-- Label -->
         <Control Id="KeyLabel" Type="Text"
                  X="20" Y="70" Width="120" Height="15"
                  Text="Security Key:" />
 
-        <!-- Input textbox -->
         <Control Id="SecurityKeyInput" Type="Edit"
-         X="20" Y="90" Width="330" Height="18"
-         Property="SECURITY_KEY">
-          <Publish Event="DoAction" Value="RefreshKeyState" />
+                 X="20" Y="90" Width="330" Height="18"
+                 Property="SECURITY_KEY" />
+
+        <!-- VALIDATE BUTTON -->
+        <Control Id="ValidateButton" Type="PushButton"
+           X="20" Y="120" Width="80" Height="18"
+           Text="Validate">
+
+          <!-- Reset validation to 0 -->
+          <Publish Event="DoAction"
+                   Value="CA_SetKeyInvalid" />
+
+          <!-- Key empty -> invalid -->
+          <Publish Property="ErrorText"
+                   Value="Security key cannot be empty."
+                   Condition="NOT SECURITY_KEY" />
+
+          <Publish Event="SpawnDialog"
+                   Value="InvalidKeyDlg"
+                   Condition="NOT SECURITY_KEY" />
+
+          <!-- Key has MIN LENGTH if its raw string expands to 10+ characters -->
+          <Publish Event="DoAction"
+                   Value="CA_SetKeyValid"
+                   Condition="SECURITY_KEY AND (SECURITY_KEY &gt;&quot;123456789&quot;)" />
+
+          <Publish Event="DoAction"
+                   Value="RefreshKeyState"
+                   Condition="SECURITY_KEY AND (SECURITY_KEY &gt;&quot;123456789&quot;)" />
+
+          <!-- If still invalid after check -->
+          <Publish Property="ErrorText"
+                   Value="Security key must be at least 10 characters."
+                   Condition="SECURITY_KEY AND NOT (SECURITY_KEY &gt;&quot;123456789&quot;)" />
+
+          <Publish Event="SpawnDialog"
+                   Value="InvalidKeyDlg"
+                   Condition="SECURITY_KEY AND NOT (SECURITY_KEY &gt;&quot;123456789&quot;)" />
+
         </Control>
 
-        <!-- Back button -->
+
+
+
+        <!-- BACK -->
         <Control Id="Back" Type="PushButton"
                  X="180" Y="243" Width="56" Height="17"
-                 Text="!(loc.WixUIBack)">
-          <Publish Event="NewDialog" Value="InstallDirDlg" />
-        </Control>
+                 Text="!(loc.WixUIBack)" />
 
-        <!-- Next button -->
+        <!-- NEXT (enabled only after validation) -->
         <Control Id="Next" Type="PushButton"
-         X="236" Y="243" Width="56" Height="17"
-         Default="yes"
-         Text="!(loc.WixUINext)"
-         DisableCondition="SECURITY_KEY = &quot;&quot;"
-         EnableCondition="SECURITY_KEY &lt;&gt; &quot;&quot;">
-          <Publish Event="NewDialog" Value="InstallDirDlg" />
-        </Control>
+                 X="236" Y="243" Width="56" Height="17"
+                 Default="yes"
+                 Text="!(loc.WixUINext)"
+                 DisableCondition="SECURITY_KEY_VALID &lt;&gt; &quot;1&quot;"
+                 EnableCondition="SECURITY_KEY_VALID = &quot;1&quot;" />
 
-        <!-- Cancel -->
+        <!-- CANCEL -->
         <Control Id="Cancel" Type="PushButton"
                  X="304" Y="243" Width="56" Height="17"
                  Cancel="yes"

@@ -22,6 +22,8 @@ namespace DeviceHubMini.Common.DTOs
         public int DispatchMaxFailureCycles { get; set; }
         public int ConfigFetchMin { get; set; }
 
+        public string Enviroment { get; set; }
+
         public DeviceConfig DeviceConfig { get; set; }
     }
 

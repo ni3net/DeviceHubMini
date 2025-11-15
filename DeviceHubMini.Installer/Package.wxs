@@ -14,6 +14,8 @@
         DowngradeErrorMessage="A newer version of DeviceHubMini Service is already installed." />
     <Property Id="SECURITY_KEY" Secure="yes" />
     <Property Id="SECURITY_KEY_VALID" Value="0" Secure="yes" />
+    <Property Id="ErrorDialogText" Value="Security key cannot be empty." />
+    <Property Id="KEY_LENGTH" Secure="yes" Value="0" />
 
     <ui:WixUI Id='WixUI_InstallDir_Custom' InstallDirectory='INSTALLFOLDER'/>
 
@@ -25,10 +27,32 @@
       <ComponentGroupRef Id="ServiceComponents" />
       <ComponentGroupRef Id="TrayComponents" />
     </Feature>
+   
+
+    <CustomAction Id="CA_SetKeyValid"
+               Property="SECURITY_KEY_VALID"
+               Value="1"
+               Execute="immediate" />
+
+    <CustomAction Id="CA_SetKeyInvalid"
+                  Property="SECURITY_KEY_VALID"
+                  Value="0"
+                  Execute="immediate" />
+
     <CustomAction Id="RefreshKeyState"
-             Property="DUMMY_PROP"
-             Value="1"
-             Execute="immediate" />
+                  Property="DUMMY_PROP"
+                  Value="1"
+                  Execute="immediate" />
+
+    <CustomAction Id="CA_SetKeyLength"
+              Property="KEY_LENGTH"
+              Value="[SECURITY_KEY]XXXXXXXXXX"
+              Execute="immediate" />
+
+    <CustomAction Id="CA_ComputeLength"
+                  Property="KEY_LENGTH"
+                  Value="[#KEY_LENGTH]"
+                  Execute="immediate" />
 
   </Package>
 </Wix>
