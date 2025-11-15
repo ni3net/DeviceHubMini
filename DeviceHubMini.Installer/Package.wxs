@@ -9,6 +9,7 @@
       Version="1.0.0.0"
       Scope="perMachine"
       UpgradeCode="a1234567-89ab-4cde-bf01-abcdef123456">
+    <MediaTemplate EmbedCab="yes" />
 
     <MajorUpgrade
         AllowSameVersionUpgrades="no"

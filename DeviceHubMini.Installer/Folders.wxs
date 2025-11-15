@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
   <Fragment>
-    <Directory Id="ProgramFiles64Folder">
+    <StandardDirectory  Id="ProgramFiles64Folder">
       <Directory Id="DIR_Company" Name="DeviceHubMini">
         <Directory Id="INSTALLFOLDER" Name="DeviceHubMini">
           <Directory Id="DIR_Service" Name="Service" />
@@ -10,7 +10,7 @@
           </Directory>
           </Directory>
       </Directory>
-    </Directory>
+    </StandardDirectory >
 
     <!-- Start Menu shortcuts -->
     <Directory Id="ProgramMenuFolder">

@@ -14,7 +14,7 @@
     <ComponentGroup Id="TrayComponents">
 
       <!-- 1️⃣ Tray Executable -->
-      <Component Id="cmp.TrayExe" Directory="DIR_Tray" Guid="*">
+      <Component Id="cmp.TrayExe" Directory="DIR_Tray" Guid="*" >
         <File Id="fil.TrayExe"
               Source="$(var.TrayPublishDir)$(var.TrayExeName)"
               KeyPath="yes" />

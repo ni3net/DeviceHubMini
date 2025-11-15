@@ -1,16 +1,19 @@
 ﻿<Project Sdk="WixToolset.Sdk/4.0.0">
-
-
+  <PropertyGroup>
+    <OutputType>Package</OutputType>
+    <Platform>x64</Platform>
+  </PropertyGroup>
   <!-- Downloads extensions -->
   <ItemGroup>
     <PackageReference Include="WixToolset.UI.wixext" Version="4.0.0" />
     <PackageReference Include="WixToolset.Util.wixext" Version="4.0.0" />
   </ItemGroup>
-
   <!-- ACTIVATES extensions (REQUIRED for util:ShellExecute) -->
   <ItemGroup>
     <WixExtension Include="WixToolset.UI.wixext" />
     <WixExtension Include="WixToolset.Util.wixext" />
   </ItemGroup>
-
+  <PropertyGroup>
+    <WixExtensionSearchPaths>$(LocalAppData)\Wix\extensions</WixExtensionSearchPaths>
+  </PropertyGroup>
 </Project>
