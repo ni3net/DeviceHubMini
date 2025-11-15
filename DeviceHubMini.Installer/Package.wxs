@@ -25,7 +25,10 @@
       <ComponentGroupRef Id="ServiceComponents" />
       <ComponentGroupRef Id="TrayComponents" />
     </Feature>
-     
+    <CustomAction Id="RefreshKeyState"
+             Property="DUMMY_PROP"
+             Value="1"
+             Execute="immediate" />
 
   </Package>
 </Wix>

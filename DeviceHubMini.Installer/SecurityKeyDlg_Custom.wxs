@@ -34,8 +34,10 @@
 
         <!-- Input textbox -->
         <Control Id="SecurityKeyInput" Type="Edit"
-                 X="20" Y="90" Width="330" Height="18"
-                 Property="SECURITY_KEY" />
+         X="20" Y="90" Width="330" Height="18"
+         Property="SECURITY_KEY">
+          <Publish Event="DoAction" Value="RefreshKeyState" />
+        </Control>
 
         <!-- Back button -->
         <Control Id="Back" Type="PushButton"
@@ -46,11 +48,11 @@
 
         <!-- Next button -->
         <Control Id="Next" Type="PushButton"
-                 X="236" Y="243" Width="56" Height="17"
-                 Default="yes"
-                 Text="!(loc.WixUINext)"
-                 DisableCondition="SECURITY_KEY = &quot;&quot;"
-                 EnableCondition="SECURITY_KEY &lt;&gt; &quot;&quot;">
+         X="236" Y="243" Width="56" Height="17"
+         Default="yes"
+         Text="!(loc.WixUINext)"
+         DisableCondition="SECURITY_KEY = &quot;&quot;"
+         EnableCondition="SECURITY_KEY &lt;&gt; &quot;&quot;">
           <Publish Event="NewDialog" Value="InstallDirDlg" />
         </Control>
 
