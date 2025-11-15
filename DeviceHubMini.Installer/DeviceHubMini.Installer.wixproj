@@ -1,6 +1,16 @@
-﻿<Project Sdk="WixToolset.Sdk/6.0.2">
+﻿<Project Sdk="WixToolset.Sdk/4.0.0">
+
+
+  <!-- Downloads extensions -->
   <ItemGroup>
-    <PackageReference Include="WixToolset.UI.wixext" Version="6.0.2" />
-    <PackageReference Include="WixToolset.Util.wixext" Version="6.0.2" />
+    <PackageReference Include="WixToolset.UI.wixext" Version="4.0.0" />
+    <PackageReference Include="WixToolset.Util.wixext" Version="4.0.0" />
   </ItemGroup>
+
+  <!-- ACTIVATES extensions (REQUIRED for util:ShellExecute) -->
+  <ItemGroup>
+    <WixExtension Include="WixToolset.UI.wixext" />
+    <WixExtension Include="WixToolset.Util.wixext" />
+  </ItemGroup>
+
 </Project>

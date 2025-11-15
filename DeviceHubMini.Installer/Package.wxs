@@ -1,38 +1,63 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
      xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui"
-     >
+     xmlns:util="http://wixtoolset.org/schemas/v4/wxs/util">
+
   <Package
-      Id="DeviceHubMini.Service"
       Name="DeviceHubMini Service"
       Manufacturer="DeviceHubMini"
       Version="1.0.0.0"
       Scope="perMachine"
       UpgradeCode="a1234567-89ab-4cde-bf01-abcdef123456">
+
     <MajorUpgrade
         AllowSameVersionUpgrades="no"
         DowngradeErrorMessage="A newer version of DeviceHubMini Service is already installed." />
+
+    <!-- Security Key Properties -->
     <Property Id="SECURITY_KEY" Secure="yes" />
     <Property Id="SECURITY_KEY_VALID" Value="0" Secure="yes" />
     <Property Id="ErrorDialogText" Value="Security key cannot be empty." />
     <Property Id="KEY_LENGTH" Secure="yes" Value="0" />
 
+    <!-- Tray Launch Checkbox (Visible on ExitDialog) -->
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOX" Value="1" />
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch DeviceHubMini Tray" />
+
+    <!-- ShellExec Target for Tray EXE -->
+    <Property Id="WixShellExecTarget" Value="[#fil.TrayExe]" />
+
+    <!-- UI -->
+    <!--<UI Id="UI">
+      <ui:WixUI Id="WixUI_Minimal" />
+
+      --><!-- Launch tray app when Finish is pressed --><!--
+      <Publish
+        Dialog="ExitDialog"
+        Control="Finish"
+        Event="DoAction"
+        Value="LaunchTrayApp"
+        Condition="WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 AND NOT Installed"
+        Order="998" />
+    </UI>-->
+
     <ui:WixUI Id='WixUI_InstallDir_Custom' InstallDirectory='INSTALLFOLDER'/>
 
+    <!-- Icons -->
     <Icon Id="errorico"   SourceFile="C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tray\bin\Release\net8.0-windows\publish\win-x64\Assets\icon-error.ico" />
-    <Icon Id="runningico"      SourceFile="C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tray\bin\Release\net8.0-windows\publish\win-x64\Assets\icon-running.ico" />
-    <Icon Id="stoppedico"      SourceFile="C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tray\bin\Release\net8.0-windows\publish\win-x64\Assets\icon-stopped.ico" />
-   
+    <Icon Id="runningico" SourceFile="C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tray\bin\Release\net8.0-windows\publish\win-x64\Assets\icon-running.ico" />
+    <Icon Id="stoppedico" SourceFile="C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tray\bin\Release\net8.0-windows\publish\win-x64\Assets\icon-stopped.ico" />
+
     <Feature Id="MainFeature" Title="DeviceHubMini Service" Level="1">
       <ComponentGroupRef Id="ServiceComponents" />
       <ComponentGroupRef Id="TrayComponents" />
     </Feature>
-   
 
+    <!-- Validation Actions -->
     <CustomAction Id="CA_SetKeyValid"
-               Property="SECURITY_KEY_VALID"
-               Value="1"
-               Execute="immediate" />
+                  Property="SECURITY_KEY_VALID"
+                  Value="1"
+                  Execute="immediate" />
 
     <CustomAction Id="CA_SetKeyInvalid"
                   Property="SECURITY_KEY_VALID"
@@ -45,14 +70,21 @@
                   Execute="immediate" />
 
     <CustomAction Id="CA_SetKeyLength"
-              Property="KEY_LENGTH"
-              Value="[SECURITY_KEY]XXXXXXXXXX"
-              Execute="immediate" />
+                  Property="KEY_LENGTH"
+                  Value="[SECURITY_KEY]XXXXXXXXXX"
+                  Execute="immediate" />
 
     <CustomAction Id="CA_ComputeLength"
                   Property="KEY_LENGTH"
                   Value="[#KEY_LENGTH]"
                   Execute="immediate" />
+
+    <!-- Custom Action for launching the tray app (WiX 4 style) -->
+    <CustomAction
+        Id="LaunchTrayApp"
+        BinaryRef="Wix4UtilCA_$(sys.BUILDARCHSHORT)"
+        DllEntry="WixShellExec"
+        Impersonate="yes" />
 
   </Package>
 </Wix>
