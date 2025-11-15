@@ -9,15 +9,13 @@
       Version="1.0.0.0"
       Scope="perMachine"
       UpgradeCode="a1234567-89ab-4cde-bf01-abcdef123456">
-
     <MajorUpgrade
         AllowSameVersionUpgrades="no"
         DowngradeErrorMessage="A newer version of DeviceHubMini Service is already installed." />
+    <Property Id="SECURITY_KEY" Secure="yes" />
+    <Property Id="SECURITY_KEY_VALID" Value="0" Secure="yes" />
 
-    <ui:WixUI
-     Id="WixUI_InstallDir"
-     InstallDirectory="INSTALLFOLDER"
-        />
+    <ui:WixUI Id='WixUI_InstallDir_Custom' InstallDirectory='INSTALLFOLDER'/>
 
     <Icon Id="errorico"   SourceFile="C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tray\bin\Release\net8.0-windows\publish\win-x64\Assets\icon-error.ico" />
     <Icon Id="runningico"      SourceFile="C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tray\bin\Release\net8.0-windows\publish\win-x64\Assets\icon-running.ico" />
