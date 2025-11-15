@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+     xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui"
+     >
   <Package
       Id="DeviceHubMini.Service"
       Name="DeviceHubMini Service"
@@ -11,7 +13,12 @@
     <MajorUpgrade
         AllowSameVersionUpgrades="no"
         DowngradeErrorMessage="A newer version of DeviceHubMini Service is already installed." />
-    
+
+    <ui:WixUI
+     Id="WixUI_InstallDir"
+     InstallDirectory="INSTALLFOLDER"
+        />
+
     <Icon Id="errorico"   SourceFile="C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tray\bin\Release\net8.0-windows\publish\win-x64\Assets\icon-error.ico" />
     <Icon Id="runningico"      SourceFile="C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tray\bin\Release\net8.0-windows\publish\win-x64\Assets\icon-running.ico" />
     <Icon Id="stoppedico"      SourceFile="C:\Users\ni3ne\source\repos\DeviceHubMini\DeviceHubMini.Tray\bin\Release\net8.0-windows\publish\win-x64\Assets\icon-stopped.ico" />
