@@ -1,5 +1,6 @@
 ﻿using DeviceHubMini.Client.Contracts;
 using DeviceHubMini.Client.Services;
+using NewRelic.Api.Agent;
 
 namespace DeviceHubMini.Client.GraphQL.Types
 {
@@ -16,6 +17,7 @@ namespace DeviceHubMini.Client.GraphQL.Types
         }
 
         [GraphQLName("getConfig")]
+        [Trace]
         public DeviceConfig GetConfi(string deviceId)
         {
             _logger.LogInformation("Fetching config for {DeviceId}", deviceId);

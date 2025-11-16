@@ -32,7 +32,7 @@ services:
 
       # Use Docker DNS service-to-service call
       GraphQLUrl: "http://devicehubmini-client:8080/graphql"
-      ScannerType: "File"
+      ScannerType: "Bluetooth"
 
       # First-run bootstrap key
       API_KEY: "prod-key-999"
@@ -41,12 +41,12 @@ services:
       - "5069:8080" # Exposed for debugging only (Optional)
 
     ## test duplicate start
-    entrypoint: ["/bin/sh"]
-    command: ["-c", "while true; do sleep 3600; done"]
+    # entrypoint: ["/bin/sh"]
+    # command: ["-c", "while true; do sleep 3600; done"]
     ## test duplicate end
 
     # Normal mode
-    # command: ["prod-key-123"]
+    command: ["prod-key-123"]
 
     volumes:
       - ./devicehub_data/Service/:/app/DeviceHubMini/db

@@ -23,12 +23,14 @@ using DeviceHubMini.Common.DTOs;
 using DeviceHubMini.Infrastructure.Contracts;
 using DeviceHubMini.Infrastructure.Repositories;
 using DeviceHubMini.Worker.Services;
+using NewRelic.Api.Agent;
 
 public class Program
 {
     private static readonly AppSettings _appSettings = new();
     private static string _baseDir = AppContext.BaseDirectory;
 
+    [Transaction]
     public static async Task Main(string[] args)
     {
         try

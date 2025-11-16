@@ -1,5 +1,6 @@
 ﻿using DeviceHubMini.Client.Contracts;
 using DeviceHubMini.Client.GraphQL;
+using NewRelic.Api.Agent;
 using System.Threading.Tasks;
 
 namespace DeviceHubMini.Client.GraphQL.Types
@@ -15,6 +16,7 @@ namespace DeviceHubMini.Client.GraphQL.Types
             _logger = logger;
         }
 
+        [Trace]
         public async Task<ScanResult> SendScan(ScanInput input)
         {
             var processedAt = DateTimeOffset.UtcNow;

@@ -9,6 +9,7 @@ using DeviceHubMini.Common.DTOs;
 using DeviceHubMini.Infrastructure.Contracts;
 using DeviceHubMini.Infrastructure.Entities;
 using Microsoft.Extensions.Logging;
+using NewRelic.Api.Agent;
 
 namespace DeviceHubMini.Infrastructure.Services
 {
@@ -35,6 +36,7 @@ namespace DeviceHubMini.Infrastructure.Services
         /// <summary>
         /// Sends a scan event to the GraphQL API via the "sendScan" mutation.
         /// </summary>
+        [Trace]
         public async Task<bool> SendScanEventAsync(ScanEventEntity ev, CancellationToken ct)
         {
             try
@@ -99,6 +101,7 @@ mutation ($input: ScanInput!) {
         /// <summary>
         /// Fetches the device configuration from GraphQL using "getConfig" query.
         /// </summary>
+        [Trace]
         public async Task<DeviceConfig?> GetDeviceConfigAsync(string deviceId, CancellationToken ct = default)
         {
             try
