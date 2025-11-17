@@ -128,7 +128,7 @@ jobs:
           sleep 15
 
       - name: Validate GraphQL API (Client)
-        run: curl -f http://localhost:5068/graphql || exit 1
+        run: curl -f http://localhost:5068/graphql/healthz || exit 1
 
       - name: Validate Service Container
         run: docker ps
