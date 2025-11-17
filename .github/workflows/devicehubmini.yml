@@ -46,7 +46,7 @@ jobs:
           dotnet build DeviceHubMini.Worker/DeviceHubMini.Worker.csproj --configuration Release --no-restore
           dotnet build DeviceHubMini.Service/DeviceHubMini.Service.csproj --configuration Release --no-restore
 
-        name: List build config files
+      - name: List build config files
         run: |
             echo "Searching for Directory.Build.props / Directory.Build.targets ..."
             find . -maxdepth 4 -name "Directory.Build.*" -print
