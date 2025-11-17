@@ -234,9 +234,10 @@ public class Program
                 services.AddHostedService<ConfigWatcherWorker>();
                 services.AddHostedService<ScannerWorker>();
                 services.AddHostedService<DataDispatcherWorker>();
-                services.AddHostedService<PeriodicTransactionWorker>();
                 // testing newrelic
-                //services.AddHostedService<AppSettingsLogger>();
+                // services.AddHostedService<PeriodicTransactionWorker>();
+
+                services.AddHostedService<AppSettingsLogger>();
 
             });
 
