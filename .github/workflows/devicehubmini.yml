@@ -8,8 +8,8 @@ on:
   workflow_dispatch:
 
 env:
-  IMAGE_CLIENT: ghcr.io/${{ github.repository }}/devicehubmini-client
-  IMAGE_SERVICE: ghcr.io/${{ github.repository }}/devicehubmini-service
+  IMAGE_CLIENT: ghcr.io/${{ github.repository_owner }}/devicehubmini/devicehubmini-client
+  IMAGE_SERVICE: ghcr.io/${{ github.repository_owner }}/devicehubmini/devicehubmini-service
 
 jobs:
 
