@@ -46,13 +46,16 @@ jobs:
           dotnet build DeviceHubMini.Worker/DeviceHubMini.Worker.csproj --configuration Release --no-restore
           dotnet build DeviceHubMini.Service/DeviceHubMini.Service.csproj --configuration Release --no-restore
 
+      #ADD THIS BLOCK
       - name: Check for Directory.Build files
         run: |
           echo "Searching for Directory.Build.props / Directory.Build.targets ..."
           find . -maxdepth 6 -name "Directory.Build.*" -print
 
+      # THEN TESTS
       - name: Run Tests
         run: dotnet test DeviceHubMini.Tests/DeviceHubMini.Tests.csproj --no-build --verbosity normal
+
 
 
   # ------------------------------------------------------
