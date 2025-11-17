@@ -1,0 +1,170 @@
+name: DeviceHubMini CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+env:
+  IMAGE_CLIENT: ghcr.io/${{ github.repository }}/devicehubmini-client
+  IMAGE_SERVICE: ghcr.io/${{ github.repository }}/devicehubmini-service
+
+jobs:
+
+  # ------------------------------------------------------
+  # 1. BUILD + TEST
+  # ------------------------------------------------------
+  build_test:
+    name: Build & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 8.0.x
+
+      # Restore only required projects
+      - name: Restore required projects only
+        run: |
+          dotnet restore DeviceHubMini.Common/DeviceHubMini.Common.csproj /p:EnableWindowsTargeting=true
+          dotnet restore DeviceHubMini.Infrastructure/DeviceHubMini.Infrastructure.csproj /p:EnableWindowsTargeting=true
+          dotnet restore DeviceHubMini.Worker/DeviceHubMini.Worker.csproj /p:EnableWindowsTargeting=true
+          dotnet restore DeviceHubMini.Service/DeviceHubMini.Service.csproj /p:EnableWindowsTargeting=true
+          dotnet restore DeviceHubMini.Tests/DeviceHubMini.Tests.csproj /p:EnableWindowsTargeting=true
+
+      # Build only required projects (skip Tray)
+      - name: Build required projects
+        run: |
+          dotnet build DeviceHubMini.Common/DeviceHubMini.Common.csproj --configuration Release --no-restore
+          dotnet build DeviceHubMini.Infrastructure/DeviceHubMini.Infrastructure.csproj --configuration Release --no-restore
+          dotnet build DeviceHubMini.Worker/DeviceHubMini.Worker.csproj --configuration Release --no-restore
+          dotnet build DeviceHubMini.Service/DeviceHubMini.Service.csproj --configuration Release --no-restore
+
+      # Run tests
+      - name: Run Tests
+        run: dotnet test DeviceHubMini.Tests/DeviceHubMini.Tests.csproj --no-build --verbosity normal
+
+
+  # ------------------------------------------------------
+  # 2. DOCKER BUILD
+  # ------------------------------------------------------
+  docker_build:
+    name: Build Docker Images
+    runs-on: ubuntu-latest
+    needs: build_test
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build DeviceHubMini Client Image
+        run: |
+          docker build -t $IMAGE_CLIENT:ci-latest ./DeviceHubMini.Client
+
+      - name: Build DeviceHubMini Service Image
+        run: |
+          docker build -t $IMAGE_SERVICE:ci-latest -f DeviceHubMini.Service/Dockerfile .
+
+      - name: Save images for next job
+        run: |
+          docker save $IMAGE_CLIENT:ci-latest -o client.tar
+          docker save $IMAGE_SERVICE:ci-latest -o service.tar
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: docker-images
+          path: |
+            client.tar
+            service.tar
+
+
+  # ------------------------------------------------------
+  # 3. DOCKER COMPOSE VALIDATION
+  # ------------------------------------------------------
+  docker_compose_validate:
+    name: Validate Docker Compose
+    runs-on: ubuntu-latest
+    needs: docker_build
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: docker-images
+
+      - name: Load built images
+        run: |
+          docker load -i client.tar
+          docker load -i service.tar
+
+      - name: Install docker compose
+        run: sudo apt-get update && sudo apt-get install docker-compose -y
+
+      - name: Start Containers
+        run: |
+          docker compose up -d
+          sleep 15
+
+      - name: Validate GraphQL API (Client)
+        run: curl -f http://localhost:5068/graphql || exit 1
+
+      - name: Validate Service Container
+        run: docker ps
+
+      - name: Shutdown
+        if: always()
+        run: docker compose down
+
+
+  # ------------------------------------------------------
+  # 4. PUSH TO GHCR
+  # ------------------------------------------------------
+  push_to_ghcr:
+    name: Push Final Images to GHCR
+    runs-on: ubuntu-latest
+    needs: docker_compose_validate
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: docker-images
+
+      - name: Load images
+        run: |
+          docker load -i client.tar
+          docker load -i service.tar
+
+      - name: Tag final images
+        run: |
+          docker tag $IMAGE_CLIENT:ci-latest $IMAGE_CLIENT:latest
+          docker tag $IMAGE_SERVICE:ci-latest $IMAGE_SERVICE:latest
+
+      - name: Push final images to GHCR
+        run: |
+          docker push $IMAGE_CLIENT:latest
+          docker push $IMAGE_SERVICE:latest
