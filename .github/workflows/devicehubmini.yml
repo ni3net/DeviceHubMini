@@ -54,7 +54,7 @@ jobs:
 
       # Run tests
       - name: Run Tests
-        run: dotnet test DeviceHubMini.Tests/DeviceHubMini.Tests.csproj --no-build --verbosity normal /p:UseVSTestRunner=false
+        run: dotnet test DeviceHubMini.Tests/DeviceHubMini.Tests.csproj --no-build --verbosity normal
 
 
   # ------------------------------------------------------
