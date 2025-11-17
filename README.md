@@ -189,6 +189,38 @@ DeviceHubMini.Client
 
 ## 🐋 Docker Setup
 
+### New Relic Monitoring
+
+Both containers are configured with New Relic APM monitoring via environment variables in `docker-compose.yml`:
+
+**Client Service:**
+```yaml
+environment:
+  # New Relic environment variables
+  CORECLR_ENABLE_PROFILING: "1"
+  CORECLR_PROFILER: "{36032161-FFC0-4B61-B559-F6C5D41BAE5A}"
+  CORECLR_NEWRELIC_HOME: "/usr/local/newrelic-dotnet-agent"
+  CORECLR_PROFILER_PATH: "/usr/local/newrelic-dotnet-agent/libNewRelicProfiler.so"
+  NEW_RELIC_LICENSE_KEY: "8241dbd393ea5ad28da6c8924edc15cbFFFFNRAL"
+  NEW_RELIC_APP_NAME: "DeviceHubMini-Client"
+  NEW_RELIC_DISTRIBUTED_TRACING_ENABLED: "true"
+```
+
+**Service Container (includes database monitoring):**
+```yaml
+environment:
+  # New Relic environment variables
+  CORECLR_ENABLE_PROFILING: "1"
+  CORECLR_PROFILER: "{36032161-FFC0-4B61-B559-F6C5D41BAE5A}"
+  CORECLR_NEWRELIC_HOME: "/usr/local/newrelic-dotnet-agent"
+  CORECLR_PROFILER_PATH: "/usr/local/newrelic-dotnet-agent/libNewRelicProfiler.so"
+  NEW_RELIC_LICENSE_KEY: "8241dbd393ea5ad28da6c8924edc15cbFFFFNRAL"
+  NEW_RELIC_APP_NAME: "DeviceHubMini-Service"
+  NEW_RELIC_DATASTORE_TRACER_QUERY_PARAMETERS_ENABLED: "true"
+  NEW_RELIC_DATASTORE_TRACER_DATABASE_NAME_REPORTING_ENABLED: "true"
+  NEW_RELIC_DISTRIBUTED_TRACING_ENABLED: "true"
+```
+
 ### Run both Container
 Run Below commands on Solution folder
 ```shell
@@ -268,3 +300,4 @@ It’s then encrypted locally using DPAPI — meaning future restarts no longer 
 | SQLite Persistence     | Stores scan event queue                                  |
 | Dockerized Setup       | For both client & service                                |
 | Windows Service Control| Fully scriptable installer (`Utility.bat`)               |
+| New Relic APM Monitoring| Full application performance monitoring with database traces |

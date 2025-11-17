@@ -35,13 +35,7 @@ EXPOSE 8080
 ENV ASPNETCORE_URLS=http://+:8080
 #ENV DOTNET_ENVIRONMENT=Production
 
-# Enable New Relic agent
-ENV CORECLR_ENABLE_PROFILING=1 \
-CORECLR_PROFILER={36032161-FFC0-4B61-B559-F6C5D41BAE5A} \
-CORECLR_NEWRELIC_HOME=/usr/local/newrelic-dotnet-agent \
-CORECLR_PROFILER_PATH=/usr/local/newrelic-dotnet-agent/libNewRelicProfiler.so \
-NEW_RELIC_LICENSE_KEY=8241dbd393ea5ad28da6c8924edc15cbFFFFNRAL \
-NEW_RELIC_APP_NAME="DeviceHubMini-Client"
+
 
 ENTRYPOINT ["dotnet", "DeviceHubMini.Client.dll"]
 # docker build -t devicehub-client:latest .
