@@ -1,7 +1,9 @@
 ﻿using DeviceHubMini.Common.DTOs;
 using DeviceHubMini.Jobs.Interface;
 using Microsoft.Extensions.Logging;
+using NewRelic.Api.Agent;
 using System;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -26,7 +28,8 @@ namespace DeviceHubMini.Worker.Scanners
             _logger = logger;
             _deviceId = appSettings.DeviceId ?? "BT-Device-001";
         }
-
+       
+      
         public Task StartAsync(CancellationToken ct)
         {
             _running = true;
@@ -40,15 +43,7 @@ namespace DeviceHubMini.Worker.Scanners
                 {
                     try
                     {
-                        // Simulate scan every 3–5 seconds
-                        var delay = random.Next(2000, 5000);
-                        await Task.Delay(delay, ct);
-
-                        var code = $"BT-{random.Next(100000, 999999)}";
-                        var scanEvent = new ScanEvent(code, DateTimeOffset.UtcNow, _deviceId);
-
-                        _logger.LogInformation("Simulated Bluetooth scan: {Code}", code);
-                        OnScan?.Invoke(this, scanEvent);
+                       await ExecuteBTEvent(random, ct);
                     }
                     catch (TaskCanceledException)
                     {
@@ -64,6 +59,21 @@ namespace DeviceHubMini.Worker.Scanners
             }, ct);
 
             return Task.CompletedTask;
+        }
+        [Transaction]
+        [Trace]
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        private async Task ExecuteBTEvent(Random random, CancellationToken ct)
+        {
+            // Simulate scan every 3–5 seconds
+            var delay = random.Next(2000, 5000);
+            await Task.Delay(delay, ct);
+
+            var code = $"BT-{random.Next(100000, 999999)}";
+            var scanEvent = new ScanEvent(code, DateTimeOffset.UtcNow, _deviceId);
+
+            _logger.LogInformation("Simulated Bluetooth scan: {Code}", code);
+            OnScan?.Invoke(this, scanEvent);
         }
 
         public Task StopAsync(CancellationToken ct)

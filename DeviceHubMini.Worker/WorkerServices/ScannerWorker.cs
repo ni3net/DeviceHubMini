@@ -4,6 +4,7 @@ using DeviceHubMini.Infrastructure.Entities;
 using DeviceHubMini.Jobs.Interface;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using NewRelic.Api.Agent;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -26,6 +27,7 @@ namespace DeviceHubMini.Worker.WorkerServices
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
+     
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             _logger.LogInformation("ScannerWorker started. Listening for scanned events...");

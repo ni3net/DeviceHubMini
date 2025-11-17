@@ -37,7 +37,7 @@ namespace DeviceHubMini.Client.GraphQL.Types
                     _store.MarkProcessed(input.EventId);
                     _logger.LogInformation("EventId = {EventId} | Scan processed successfully", input.EventId);
                     // Dealy the process to mimic the duplicate case
-                   await Task.Delay(5000);
+                  // await Task.Delay(5000);
                 }
 
                 

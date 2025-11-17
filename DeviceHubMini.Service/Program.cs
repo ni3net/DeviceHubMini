@@ -24,21 +24,27 @@ using DeviceHubMini.Infrastructure.Contracts;
 using DeviceHubMini.Infrastructure.Repositories;
 using DeviceHubMini.Worker.Services;
 using NewRelic.Api.Agent;
+using NewRelic.Api.Agent;
+using DeviceHubMini.Service;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Builder;
 
 public class Program
 {
     private static readonly AppSettings _appSettings = new();
     private static string _baseDir = AppContext.BaseDirectory;
 
-    [Transaction]
     public static async Task Main(string[] args)
     {
         try
         {
 
             var environment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT") ?? "Production";
-           
-            Console.WriteLine($"Current environment: {environment}");
+
+            //Console.WriteLine("Profiler Enabled = " + Environment.GetEnvironmentVariable("CORECLR_ENABLE_PROFILING"));
+            //Console.WriteLine("Profiler Path = " + Environment.GetEnvironmentVariable("CORECLR_PROFILER_PATH"));
+            //Console.WriteLine("Profiler File Exists = " + File.Exists(Environment.GetEnvironmentVariable("CORECLR_PROFILER_PATH")));
+            //Console.WriteLine($"Current environment: {environment}");
 
             // Load configuration
             var configuration = BuildConfiguration(environment);
@@ -224,12 +230,13 @@ public class Program
                     Log.Information("Scanner type: FileWatcherScanner selected.");
                 }
 
-                // Background workers
+                //Background workers
                 services.AddHostedService<ConfigWatcherWorker>();
                 services.AddHostedService<ScannerWorker>();
                 services.AddHostedService<DataDispatcherWorker>();
-
-                services.AddHostedService<AppSettingsLogger>();
+                services.AddHostedService<PeriodicTransactionWorker>();
+                // testing newrelic
+                //services.AddHostedService<AppSettingsLogger>();
 
             });
 

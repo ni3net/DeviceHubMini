@@ -5,6 +5,7 @@ using DeviceHubMini.Infrastructure.Entities;
 using NewRelic.Api.Agent;
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace DeviceHubMini.Infrastructure.Repositories
@@ -18,6 +19,7 @@ namespace DeviceHubMini.Infrastructure.Repositories
             _repository = repository;
         }
         [Trace]
+        [MethodImpl(MethodImplOptions.NoInlining)]
         public async Task<IEnumerable<ScanEventEntity>> GetPendingEventsAsync(int limit = 25)
         {
             const string sql = @"
@@ -30,6 +32,7 @@ LIMIT @Limit;";
             return await _repository.GetListAsync<ScanEventEntity>(sql, new { Limit = limit });
         }
         [Trace]
+        [MethodImpl(MethodImplOptions.NoInlining)]
 
         public async Task MarkAsSentAsync(string eventId, DateTimeOffset sentAt)
         {
@@ -43,6 +46,7 @@ WHERE EventId = @EventId;";
             await _repository.ExecuteAsync(sql, new { EventId = eventId, SentAt = sentAt });
         }
         [Trace]
+        [MethodImpl(MethodImplOptions.NoInlining)]
 
         public async Task MarkAsFailedAsync(string eventId, string errorMessage)
         {
@@ -57,6 +61,7 @@ WHERE EventId = @EventId;";
         }
 
         [Trace]
+        [MethodImpl(MethodImplOptions.NoInlining)]
         public async Task AddScanEventAsync(ScanEventEntity scanEvent)
         {
             const string sql = @"

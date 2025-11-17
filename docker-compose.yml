@@ -9,6 +9,7 @@ services:
       dockerfile: Dockerfile
 
     environment:
+      TZ: "Asia/Kolkata"
       ASPNETCORE_ENVIRONMENT: "Production"
       ASPNETCORE_URLS: "http://+:8080"
 
@@ -27,12 +28,13 @@ services:
       dockerfile: DeviceHubMini.Service/Dockerfile
 
     environment:
+      TZ: "Asia/Kolkata"
       ASPNETCORE_ENVIRONMENT: "Production"
       ASPNETCORE_URLS: "http://+:8080"
 
       # Use Docker DNS service-to-service call
       GraphQLUrl: "http://devicehubmini-client:8080/graphql"
-      ScannerType: "Bluetooth"
+      ScannerType: "File"
 
       # First-run bootstrap key
       API_KEY: "prod-key-999"
