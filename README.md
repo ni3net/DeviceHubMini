@@ -269,6 +269,6 @@ It’s then encrypted locally using DPAPI — meaning future restarts no longer 
 | Dockerized Setup       | For both client & service                                |
 | Windows Service Control| Fully scriptable installer (`Utility.bat`)               |
 
-## 🧭 Nrerelic dashbord
+## 🧭 New-relic dashbord
 <img width="956" height="881" alt="image" src="https://github.com/user-attachments/assets/aad4c20d-a237-4eef-b463-4e3b9ef86843" />
 
