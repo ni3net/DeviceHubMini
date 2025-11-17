@@ -2,6 +2,8 @@
 using DeviceHubMini.Common.Contracts;
 using DeviceHubMini.Infrastructure.Contracts;
 using Microsoft.Extensions.Logging;
+using NewRelic.Api.Agent;
+using System.Runtime.CompilerServices;
 
 namespace DeviceHubMini.Worker.Services
 {
@@ -20,7 +22,7 @@ namespace DeviceHubMini.Worker.Services
             _graphqlClient = graphqlClient;
             _logger = logger;
         }
-
+        [Transaction]
         public async Task<bool> DispatchPendingEventsAsync(CancellationToken ct)
         {
             var pending = await _eventRepo.GetPendingEventsAsync(25);

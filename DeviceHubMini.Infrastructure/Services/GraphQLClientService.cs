@@ -1,14 +1,16 @@
-using System;
-using System.Net.Http;
-using System.Net.Http.Json;
-using System.Text;
-using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using DeviceHubMini.Common.DTOs;
 using DeviceHubMini.Infrastructure.Contracts;
 using DeviceHubMini.Infrastructure.Entities;
 using Microsoft.Extensions.Logging;
+using NewRelic.Api.Agent;
+using System;
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Text.Json;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace DeviceHubMini.Infrastructure.Services
 {
@@ -35,6 +37,9 @@ namespace DeviceHubMini.Infrastructure.Services
         /// <summary>
         /// Sends a scan event to the GraphQL API via the "sendScan" mutation.
         /// </summary>
+        [Trace]
+        [MethodImpl(MethodImplOptions.NoInlining)]
+
         public async Task<bool> SendScanEventAsync(ScanEventEntity ev, CancellationToken ct)
         {
             try
@@ -99,6 +104,8 @@ mutation ($input: ScanInput!) {
         /// <summary>
         /// Fetches the device configuration from GraphQL using "getConfig" query.
         /// </summary>
+        [Trace]
+        [MethodImpl(MethodImplOptions.NoInlining)]
         public async Task<DeviceConfig?> GetDeviceConfigAsync(string deviceId, CancellationToken ct = default)
         {
             try

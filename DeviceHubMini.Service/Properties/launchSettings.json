@@ -2,8 +2,17 @@
   "profiles": {
     "DeviceHubMini.Service": {
       "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
       "environmentVariables": {
-        "DOTNET_ENVIRONMENT": "Development"
+        "CORECLR_ENABLE_PROFILING": "1",
+        "CORECLR_PROFILER": "{36032161-FFC0-4B61-B559-F6C5D41BAE5A}",
+        "CORECLR_PROFILER_PATH": "C:\\Program Files\\New Relic\\.NET Agent\\netcore\\NewRelic.Profiler.dll",
+        "NEW_RELIC_HOME": "C:\\Program Files\\New Relic\\.NET Agent",
+        "NEW_RELIC_LICENSE_KEY": "8241dbd393ea5ad28da6c8924edc15cbFFFFNRAL",
+        "NEW_RELIC_APP_NAME": "DeviceHubMini-Service",
+        "NEW_RELIC_DISTRIBUTED_TRACING_ENABLED":"true"
+
       }
     }
   }

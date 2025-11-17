@@ -2,7 +2,6 @@ using DeviceHubMini.Client.Contracts;
 using DeviceHubMini.Client.GraphQL.Types;
 using DeviceHubMini.Client.Security;
 using DeviceHubMini.Client.Services;
-
 using Serilog;
 
 // Add Serilog before building

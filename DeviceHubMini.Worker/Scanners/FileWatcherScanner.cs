@@ -2,9 +2,11 @@
 using DeviceHubMini.Jobs.Interface;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
+using NewRelic.Api.Agent;
 using System;
 using System.Collections.Concurrent;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -65,6 +67,9 @@ namespace DeviceHubMini.Worker.Scanners
             return Task.CompletedTask;
         }
 
+        [Transaction]
+        [Trace]
+        [MethodImpl(MethodImplOptions.NoInlining)]
         private async Task HandleCandidateAsync(string path, CancellationToken ct)
         {
           

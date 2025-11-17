@@ -1,10 +1,11 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using DeviceHubMini.Common.Contracts;
+﻿using DeviceHubMini.Common.Contracts;
 using DeviceHubMini.Common.DTOs;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using NewRelic.Api.Agent;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace DeviceHubMini.Worker.WorkerServices
 {
@@ -32,7 +33,7 @@ namespace DeviceHubMini.Worker.WorkerServices
                 ? appSettings.DispatchMaxFailureCycles
                 : 3;
         }
-
+       
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             _logger.LogInformation("DataDispatcherWorker started. Interval = {Seconds}s", _dispatchInterval.TotalSeconds);

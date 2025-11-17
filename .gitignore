@@ -483,3 +483,4 @@ $RECYCLE.BIN/
 # Vim temporary swap files
 *.swp
 devicehub_data/Service/
+*.mp4
