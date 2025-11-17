@@ -52,7 +52,10 @@ jobs:
           echo "Searching for Directory.Build.props / Directory.Build.targets ..."
           find . -maxdepth 6 -name "Directory.Build.*" -print
 
-      # THEN TESTS
+      # Build and run tests
+      - name: Build Test Project
+        run: dotnet build DeviceHubMini.Tests/DeviceHubMini.Tests.csproj --configuration Release --no-restore
+        
       - name: Run Tests
         run: dotnet test DeviceHubMini.Tests/DeviceHubMini.Tests.csproj --no-build --verbosity normal
 
