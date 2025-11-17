@@ -131,7 +131,7 @@ jobs:
       - name: Validate GraphQL API (Client)
         run: |
           echo "Calling GraphQL health endpoint with x-api-key..."
-          curl -f -H "x-api-key: $GRAPHQL_API_KEY" http://localhost:5068/graphql/healthz || exit 1
+          curl -f -H "x-api-key: $GRAPHQL_API_KEY" http://localhost:5068/healthz || exit 1
 
       - name: Validate Service Container
         run: docker ps
