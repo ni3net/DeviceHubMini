@@ -304,4 +304,14 @@ It’s then encrypted locally using DPAPI — meaning future restarts no longer 
 
 ## 🧭 New-relic dashbord
 <img width="956" height="881" alt="image" src="https://github.com/user-attachments/assets/aad4c20d-a237-4eef-b463-4e3b9ef86843" />
+## 🧭 Installer 
+Find the installer User Manual directory
+<img width="489" height="376" alt="image" src="https://github.com/user-attachments/assets/a4ca9740-ba01-4c71-90d7-c0b9b32daf0d" />
+<img width="479" height="373" alt="image" src="https://github.com/user-attachments/assets/2a1e1fac-5a61-4218-9a32-fbde767c8954" />
+<img width="369" height="243" alt="image" src="https://github.com/user-attachments/assets/6d1ff522-f930-49a4-b667-669977f56742" />
+
+
+
+
+
 
